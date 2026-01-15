@@ -55,14 +55,15 @@
             box-shadow: 0 12px 24px rgba(0,0,0,0.15);
         }
 
-        /* 核心修改：设置图片为 400x400 的显示比例（正方形） */
-        .card img {
+       .card img {
             width: 100%;
-            aspect-ratio: 4 / 3; /* 强制宽高比为 1:1 */
-            object-fit: cover;    /* 确保图片填充且不拉伸 */
+            aspect-ratio: 4 / 3; /* 宽高比设为 4:3 */
+            object-fit: contain;  /* 完整显示图片，不裁剪，比例不符时会有留白 */
             display: block;
             border-bottom: 1px solid #eee;
+            background-color: #f9f9f9; /* 建议增加背景色，防止图片比例不符时留白处太突兀 */
         }
+
 
         .card-content {
             padding: 20px;
