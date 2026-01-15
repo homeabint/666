@@ -62,8 +62,18 @@
             display: block;
             border-bottom: 1px solid #eee;
             background-color: #f9f9f9; /* 建议增加背景色，防止图片比例不符时留白处太突兀 */
+            transition: transform 0.3s ease;
         }
 
+/* 鼠标滑过时，图片稍微放大一点点，很有动感 */
+.card:hover img {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* 别忘了在 .card img 里加上 transition 确保缩回去时也平滑 */
+
+}
 
         .card-content {
             padding: 20px;
