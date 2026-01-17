@@ -1,5 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" id="main-html"> ```
+
+### 2. 编写切换函数（JavaScript）
+你可以写一个简单的函数，在用户点击切换按钮时，同时修改文字内容和 HTML 的 `lang` 属性：
+
+```javascript
+function toggleLanguage(lang) {
+    const htmlTag = document.getElementById('main-html');
+    
+    if (lang === 'en') {
+        htmlTag.lang = 'en-US';  // 切换为英文状态
+        // 这里执行切换页面文字为英文的逻辑
+    } else {
+        htmlTag.lang = 'zh-CN';  // 切换为中文状态
+        // 这里执行切换页面文字为中文的逻辑
+    }
+}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
