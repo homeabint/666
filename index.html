@@ -8,6 +8,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
+
+.footer-banner {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto 50px auto; /* 上下外邊距 */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.footer-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s;
+}
+
+.footer-banner img:hover {
+    transform: scale(1.02); /* 滑鼠懸停稍微放大 */
+}
+
+/* 針對移動端的適配 */
+@media (max-width: 600px) {
+    .footer-banner {
+        width: 94%;
+        margin-bottom: 100px; /* 為左側機器人按鈕留出空間 */
+    }
+}
+
+
+
         :root {
             --primary-blue: #1890ff;
             --dark-blue: #001529;
