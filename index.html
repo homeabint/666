@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>大流量卡展示</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
-            --card-width: 300px; /* 控制卡片宽度 */
-            --img-size: 400px;   /* 目标分辨率参考 */
+            --card-width: 300px;
+            --img-size: 400px;
         }
 
         body {
@@ -30,7 +33,7 @@
             margin-bottom: 30px;
         }
 
-        /* 仅添加切换按钮样式 */
+        /* 切换按钮样式 */
         .lang-switcher {
             margin-bottom: 10px;
         }
@@ -73,7 +76,7 @@
             box-shadow: 0 12px 24px rgba(0,0,0,0.15);
         }
 
-       .card img {
+        .card img {
             width: 100%;
             aspect-ratio: 4 / 3;
             object-fit: contain;
@@ -85,7 +88,6 @@
 
         .card:hover img {
             transform: scale(1.05);
-            transition: transform 0.3s ease;
         }
 
         .card-content {
@@ -105,12 +107,6 @@
         .card-content h3 a {
             text-decoration: none;
             color: #1890ff;
-            transition: color 0.2s;
-        }
-
-        .card-content h3 a:hover {
-            color: #40a9ff;
-            text-decoration: underline;
         }
 
         .card-content p {
@@ -120,69 +116,39 @@
             margin: 0;
         }
 
+        /* RSS 悬浮按钮样式 */
+        .rss-float {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff9900;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .rss-float:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
         @media (max-width: 600px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
+            .gallery { grid-template-columns: 1fr; }
         }
     </style>
-
-
-/* RSS 悬浮按钮样式 */
-.rss-float {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 50px;
-    height: 50px;
-    background-color: #ff9900; /* RSS 经典橙色 */
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-
-.rss-float:hover {
-    transform: scale(1.1) rotate(15deg);
-    background-color: #e68a00;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-}
-
-/* 提示文字（可选） */
-.rss-float::before {
-    content: "RSS";
-    position: absolute;
-    right: 60px;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-}
-
-.rss-float:hover::before {
-    opacity: 1;
-}
-
-
-
 </head>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<body>
 
 <a href="feed.xml" class="rss-float" target="_blank" title="RSS Feed">
     <i class="fas fa-rss fa-lg"></i>
 </a>
-
-<body>
 
 <header>
     <div class="lang-switcher">
@@ -196,113 +162,79 @@
 <div class="gallery">
     <div class="card">
         <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/1.png" alt="中国电信大流量卡">
+            <img src="img/1.png" alt="Card">
         </a>
         <div class="card-content">
             <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百G流量卡" data-en="China Telecom · 100GB Plan">中国电信 · 百G流量卡</a></h3>
-            <p class="lang-text" data-zh="19元/29元起，享百G超大流量。官方正规号卡，顺丰包邮，首月免费体验。" data-en="$19/mo, 100GB+ data. Official SIM, free shipping, free trial for the 1st month.">19元/29元起，享百G超大流量。官方正规号卡，顺丰包邮，首月免费体验。</p>
+            <p class="lang-text" data-zh="19元起，享百G超大流量。官方正规号卡。" data-en="From $19, 100GB+ data. Official SIM.">19元起，享百G超大流量。官方正规号卡。</p>
         </div>
     </div>
-
     <div class="card">
         <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/2.png" alt="中国移動大流量卡">
+            <img src="img/2.png" alt="Card">
         </a>
         <div class="card-content">
             <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百G流量卡" data-en="China Telecom · 100GB Plan">中国电信 · 百G流量卡</a></h3>
-            <p class="lang-text" data-zh="想要体验无忧畅爽的上网体验吗？挑选一张优质流量卡吧！" data-en="Looking for a worry-free internet experience? Pick a premium data card now!">想要体验无忧畅爽的上网体验吗？挑选一张优质流量卡吧！</p>
-        </div>
-    </div>
-    
-    <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/3.png" alt="中国联通大流量卡">
-        </a>
-        <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百G流量卡" data-en="China Telecom · 100GB Plan">中国电信 · 百G流量卡</a></h3>
-            <p class="lang-text" data-zh="大流量卡火热来袭！无套餐，无合约。" data-en="Massive data plans! No fixed packages, no contracts.">大流量卡火热来袭！无套餐，无合约。</p>
-        </div>
-    </div>
-    
-    <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/0.png" alt="大流量卡">
-        </a>
-        <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百G流量卡" data-en="China Telecom · 100GB Plan">中国电信 · 百G流量卡</a></h3>
-            <p class="lang-text" data-zh="2026年手机卡新王诞生！热门电话卡套餐推荐。" data-en="The new king of SIM cards in 2026! Recommended plans are here.">2026年手机卡新王诞生！热门电话卡套餐推荐。</p>
+            <p class="lang-text" data-zh="优质流量卡挑选，稳定可靠。" data-en="Premium data cards, stable and reliable.">优质流量卡挑选，稳定可靠。</p>
         </div>
     </div>
 </div>
 
 <script>
+    // 语言切换函数
     function switchLang(lang) {
-        // 1. 修改 HTML 的 lang 属性
         document.getElementById('html-tag').lang = (lang === 'en' ? 'en-US' : 'zh-CN');
-
-        // 2. 切换文字内容
         const elements = document.querySelectorAll('.lang-text');
         elements.forEach(el => {
             el.innerText = el.getAttribute('data-' + lang);
         });
-
-        // 3. 切换按钮激活样式
         document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
         document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-        
-        // 保存用户选择
         localStorage.setItem('pref-lang', lang);
     }
 
-    // 初始化加载
+    // 初始化
     window.onload = () => {
         const savedLang = localStorage.getItem('pref-lang') || 'zh';
         switchLang(savedLang);
     };
 
+    // RSS 生成函数
+    function generateRSS() {
+        const isEn = document.getElementById('html-tag').lang === 'en-US';
+        const cards = document.querySelectorAll('.card');
+        let itemsXml = "";
 
-
-
-// 自动化 RSS 生成函数
-function generateRSS() {
-    const isEn = document.getElementById('html-tag').lang === 'en-US';
-    const cards = document.querySelectorAll('.card');
-    let itemsXml = "";
-
-    cards.forEach(card => {
-        const title = card.querySelector('h3 a').innerText;
-        const link = card.querySelector('h3 a').href;
-        const desc = card.querySelector('p').innerText;
-        const date = new Date().toUTCString(); // RSS 标准日期格式
-
-        itemsXml += `
+        cards.forEach(card => {
+            const titleEl = card.querySelector('h3 a');
+            const descEl = card.querySelector('p');
+            const title = isEn ? titleEl.getAttribute('data-en') : titleEl.getAttribute('data-zh');
+            const desc = isEn ? descEl.getAttribute('data-en') : descEl.getAttribute('data-zh');
+            const link = titleEl.href;
+            
+            itemsXml += `
     <item>
         <title><![CDATA[${title}]]></title>
         <link>${link}</link>
         <description><![CDATA[${desc}]]></description>
-        <pubDate>${date}</pubDate>
-        <guid>${link}</guid>
+        <pubDate>${new Date().toUTCString()}</pubDate>
+        <guid>${link}#${Math.random().toString(36).substr(2,4)}</guid>
     </item>`;
-    });
+        });
 
-    const fullXml = `<?xml version="1.0" encoding="UTF-8" ?>
+        const fullXml = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
     <title>${isEn ? 'High-Data SIM Cards' : '官方正规大流量卡'}</title>
     <link>${window.location.href}</link>
-    <description>${isEn ? 'Latest 5G Data Plans' : '最新5G大流量套餐更新'}</description>
+    <description>Latest 5G Data Plans</description>
     <language>${isEn ? 'en-us' : 'zh-cn'}</language>
     ${itemsXml}
 </channel>
 </rss>`;
-
-    console.log("%c--- RSS XML 代码已生成 (请复制下方内容) ---", "color: #ff9900; font-weight: bold; font-size: 14px;");
-    console.log(fullXml);
-    alert("RSS代码已在控制台生成！请按 F12 复制。");
-}
-
-
-
+        console.log(fullXml);
+        alert("RSS XML has been generated in Console (F12)!");
+    }
 </script>
 
 </body>
