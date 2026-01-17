@@ -259,6 +259,50 @@
         const savedLang = localStorage.getItem('pref-lang') || 'zh';
         switchLang(savedLang);
     };
+
+
+
+
+// 自动化 RSS 生成函数
+function generateRSS() {
+    const isEn = document.getElementById('html-tag').lang === 'en-US';
+    const cards = document.querySelectorAll('.card');
+    let itemsXml = "";
+
+    cards.forEach(card => {
+        const title = card.querySelector('h3 a').innerText;
+        const link = card.querySelector('h3 a').href;
+        const desc = card.querySelector('p').innerText;
+        const date = new Date().toUTCString(); // RSS 标准日期格式
+
+        itemsXml += `
+    <item>
+        <title><![CDATA[${title}]]></title>
+        <link>${link}</link>
+        <description><![CDATA[${desc}]]></description>
+        <pubDate>${date}</pubDate>
+        <guid>${link}</guid>
+    </item>`;
+    });
+
+    const fullXml = `<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+    <title>${isEn ? 'High-Data SIM Cards' : '官方正规大流量卡'}</title>
+    <link>${window.location.href}</link>
+    <description>${isEn ? 'Latest 5G Data Plans' : '最新5G大流量套餐更新'}</description>
+    <language>${isEn ? 'en-us' : 'zh-cn'}</language>
+    ${itemsXml}
+</channel>
+</rss>`;
+
+    console.log("%c--- RSS XML 代码已生成 (请复制下方内容) ---", "color: #ff9900; font-weight: bold; font-size: 14px;");
+    console.log(fullXml);
+    alert("RSS代码已在控制台生成！请按 F12 复制。");
+}
+
+
+
 </script>
 
 </body>
