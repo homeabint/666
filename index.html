@@ -207,30 +207,12 @@
 
 <script>
     // 语言切换函数
-    function switchLang(lang) {
-        document.getElementById('html-tag').lang = (lang === 'en' ? 'en-US' : 'zh-CN');
-        const elements = document.querySelectorAll('.lang-text');
-        elements.forEach(el => {
-            el.innerText = el.getAttribute('data-' + lang);
-        });
-        document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
-        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-        localStorage.setItem('pref-lang', lang);
-    }
-
-    // 初始化
-    window.onload = () => {
-        const savedLang = localStorage.getItem('pref-lang') || 'zh';
-        switchLang(savedLang);
-    };
-
-    // RSS 生成函数
 function generateRSS() {
     const isEn = document.getElementById('html-tag').lang === 'en-US';
     const cards = document.querySelectorAll('.card');
     let itemsXml = "";
 
-    cards.forEach(card => {
+    cards.forEach((card, index) => {
         const titleEl = card.querySelector('h3 a');
         const descEl = card.querySelector('p');
         const imgEl = card.querySelector('img');
@@ -238,8 +220,6 @@ function generateRSS() {
         const title = isEn ? titleEl.getAttribute('data-en') : titleEl.getAttribute('data-zh');
         const desc = isEn ? descEl.getAttribute('data-en') : descEl.getAttribute('data-zh');
         const link = titleEl.href;
-        
-        // 关键修复：获取图片的绝对 URL 地址
         const absoluteImgUrl = imgEl.src; 
 
         itemsXml += `
@@ -247,32 +227,33 @@ function generateRSS() {
         <title><![CDATA[${title}]]></title>
         <link>${link}</link>
         <description><![CDATA[
-            <div style="margin-bottom:10px;">
-                <img src="${absoluteImgUrl}" style="width:100%; max-width:400px; border-radius:8px;" />
-            </div>
+            <div style="margin-bottom:10px;"><img src="${absoluteImgUrl}" style="width:100%" /></div>
             <p>${desc}</p>
-            <p><a href="${link}">查看详情 / View Details</a></p>
         ]]></description>
         <pubDate>${new Date().toUTCString()}</pubDate>
-        <guid isPermaLink="false">${link}-${Math.random().toString(36).substr(2,4)}</guid>
+        <guid isPermaLink="false">${link}-${index}-v2026</guid>
+        <enclosure url="${absoluteImgUrl}" type="image/png" length="0" />
+        <media:content url="${absoluteImgUrl}" medium="image" type="image/png" />
     </item>`;
     });
 
     const fullXml = `<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <channel>
-    <title>${isEn ? 'Official High-Data SIM Cards' : '官方正规大流量卡'}</title>
+    <title>${isEn ? 'High-Data SIM Cards' : '官方正规大流量卡'}</title>
     <link>${window.location.href}</link>
-    <description>${isEn ? 'Latest 5G Data Plans' : '最新5G大流量套餐更新'}</description>
+    <description>Latest 5G Data Plans</description>
     <language>${isEn ? 'en-us' : 'zh-cn'}</language>
     ${itemsXml}
 </channel>
 </rss>`;
 
-    console.log("%c--- 包含图片的 RSS 代码已生成 ---", "color: #ff9900; font-weight: bold;");
     console.log(fullXml);
-    alert("带图片的 RSS 代码已生成，请在控制台复制并更新 feed.xml！");
+    alert("终极图片版 RSS 代码已在控制台生成！");
 }
+
+
+
 
 </script>
 
