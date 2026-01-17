@@ -1,4 +1,60 @@
+
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* 右上角定位样式 */
+        .top-right-date {
+            position: fixed; /* 固定在浏览器窗口 */
+            top: 20px;       /* 距离顶部 20 像素 */
+            right: 20px;     /* 距离右侧 20 像素 */
+            
+            /* 美化样式 */
+            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            backdrop-filter: blur(10px);         /* 磨砂效果 */
+            padding: 10px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            
+            /* 字体设置 */
+            font-family: "SF Pro Display", "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            z-index: 9999; /* 确保显示在最上层 */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="date-display" class="top-right-date">加载中...</div>
+
+    <script>
+        function showRealTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            
+            // 获取星期
+            const weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            const week = weekDays[now.getDay()];
+
+            // 格式化：2026年1月17日 星期六
+            document.getElementById('date-display').innerText = `${year}年${month}月${day}日 ${week}`;
+        }
+
+        // 立即执行并每小时更新一次
+        showRealTime();
+        setInterval(showRealTime, 3600000);
+    </script>
+</body>
+</html>
+
+
+
 <html lang="zh-CN" id="html-tag">
 <head>
     <meta charset="UTF-8">
