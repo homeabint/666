@@ -1,41 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
-    <title>官方正规大流量卡 | High-Data SIM Cards</title>
+    <title>官方正规大流量卡</title>
     <link>https://ym.kashijiehaoka.cn/</link>
-    <description>最新5G大流量套餐更新 | Latest 5G Data Plans</description>
+    <description>最新5G大流量套餐更新</description>
     <language>zh-cn</language>
-
+    
     <item>
         <title><![CDATA[中国电信 · 百G流量卡]]></title>
         <link>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798</link>
-        <description><![CDATA[19元/29元起，享百G超大流量。官方正规号卡，顺丰包邮，首月免费体验。]]></description>
-        <pubDate>Sat, 17 Jan 2026 10:30:00 GMT</pubDate>
-        <guid>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798#card1</guid>
-    </item>
-
-    <item>
-        <title><![CDATA[中国电信 · 百G流量卡]]></title>
-        <link>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798</link>
-        <description><![CDATA[想要体验无忧畅爽的上网体验吗？立即挑选一张优质流量卡吧！稳定可靠的网络服务。]]></description>
-        <pubDate>Sat, 17 Jan 2026 10:30:00 GMT</pubDate>
-        <guid>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798#card2</guid>
-    </item>
-
-    <item>
-        <title><![CDATA[中国电信 · 百G流量卡]]></title>
-        <link>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798</link>
-        <description><![CDATA[大流量卡火热来袭！图片写着多少就是每个月多少流量，无套餐，无合约。]]></description>
-        <pubDate>Sat, 17 Jan 2026 10:30:00 GMT</pubDate>
-        <guid>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798#card3</guid>
-    </item>
-
-    <item>
-        <title><![CDATA[中国电信 · 百G流量卡]]></title>
-        <link>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798</link>
-        <description><![CDATA[2026年手机卡新王诞生！这届流量卡到底有多牛？热门电话卡套餐推荐。]]></description>
-        <pubDate>Sat, 17 Jan 2026 10:30:00 GMT</pubDate>
-        <guid>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798#card4</guid>
+        <description><![CDATA[
+            <img src="https://ym.kashijiehaoka.cn/img/1.png" style="width:100%" />
+            <p>19元起，享百G超大流量。官方正规号卡。</p>
+        ]]></description>
+        <pubDate>Sat, 17 Jan 2026 11:00:00 GMT</pubDate>
     </item>
 </channel>
 </rss>
