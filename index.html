@@ -225,41 +225,55 @@
     };
 
     // RSS 生成函数
-    function generateRSS() {
-        const isEn = document.getElementById('html-tag').lang === 'en-US';
-        const cards = document.querySelectorAll('.card');
-        let itemsXml = "";
+function generateRSS() {
+    const isEn = document.getElementById('html-tag').lang === 'en-US';
+    const cards = document.querySelectorAll('.card');
+    let itemsXml = "";
 
-        cards.forEach(card => {
-            const titleEl = card.querySelector('h3 a');
-            const descEl = card.querySelector('p');
-            const title = isEn ? titleEl.getAttribute('data-en') : titleEl.getAttribute('data-zh');
-            const desc = isEn ? descEl.getAttribute('data-en') : descEl.getAttribute('data-zh');
-            const link = titleEl.href;
-            
-            itemsXml += `
+    cards.forEach(card => {
+        const titleEl = card.querySelector('h3 a');
+        const descEl = card.querySelector('p');
+        const imgEl = card.querySelector('img');
+        
+        const title = isEn ? titleEl.getAttribute('data-en') : titleEl.getAttribute('data-zh');
+        const desc = isEn ? descEl.getAttribute('data-en') : descEl.getAttribute('data-zh');
+        const link = titleEl.href;
+        
+        // 关键修复：获取图片的绝对 URL 地址
+        const absoluteImgUrl = imgEl.src; 
+
+        itemsXml += `
     <item>
         <title><![CDATA[${title}]]></title>
         <link>${link}</link>
-        <description><![CDATA[${desc}]]></description>
+        <description><![CDATA[
+            <div style="margin-bottom:10px;">
+                <img src="${absoluteImgUrl}" style="width:100%; max-width:400px; border-radius:8px;" />
+            </div>
+            <p>${desc}</p>
+            <p><a href="${link}">查看详情 / View Details</a></p>
+        ]]></description>
         <pubDate>${new Date().toUTCString()}</pubDate>
-        <guid>${link}#${Math.random().toString(36).substr(2,4)}</guid>
+        <guid isPermaLink="false">${link}-${Math.random().toString(36).substr(2,4)}</guid>
     </item>`;
-        });
+    });
 
-        const fullXml = `<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
+    const fullXml = `<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <channel>
-    <title>${isEn ? 'High-Data SIM Cards' : '官方正规大流量卡'}</title>
+    <title>${isEn ? 'Official High-Data SIM Cards' : '官方正规大流量卡'}</title>
     <link>${window.location.href}</link>
-    <description>Latest 5G Data Plans</description>
+    <description>${isEn ? 'Latest 5G Data Plans' : '最新5G大流量套餐更新'}</description>
     <language>${isEn ? 'en-us' : 'zh-cn'}</language>
     ${itemsXml}
 </channel>
 </rss>`;
-        console.log(fullXml);
-        alert("RSS XML has been generated in Console (F12)!");
-    }
+
+    console.log("%c--- 包含图片的 RSS 代码已生成 ---", "color: #ff9900; font-weight: bold;");
+    console.log(fullXml);
+    alert("带图片的 RSS 代码已生成，请在控制台复制并更新 feed.xml！");
+}
+
 </script>
 
 </body>
