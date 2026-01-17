@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>大流量卡展示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --card-width: 300px; /* 控制卡片宽度 */
-            --img-size: 400px;   /* 目标分辨率参考 */
+            --card-width: 300px;
+            --img-size: 400px;
+            --rss-orange: #ff9900; /* RSS 标准橙色 */
         }
 
         body {
@@ -24,15 +26,40 @@
             background: linear-gradient(135deg, #1890ff, #001529);
             color: white;
             width: 100%;
-            padding: 2rem 0;
+            padding: 2.5rem 0;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-bottom: 30px;
+            position: relative;
+        }
+
+        /* RSS 订阅按钮样式 */
+        .rss-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--rss-orange);
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .rss-btn:hover {
+            background-color: #e68a00;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+        }
+
+        .rss-btn i {
+            margin-right: 6px;
         }
 
         .gallery {
             display: grid;
-            /* 这里的 300px 对应下方卡片的宽度 */
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
             width: 90%;
@@ -55,25 +82,19 @@
             box-shadow: 0 12px 24px rgba(0,0,0,0.15);
         }
 
-       .card img {
+        .card img {
             width: 100%;
-            aspect-ratio: 4 / 3; /* 宽高比设为 4:3 */
-            object-fit: contain;  /* 完整显示图片，不裁剪，比例不符时会有留白 */
+            aspect-ratio: 4 / 3;
+            object-fit: contain;
             display: block;
             border-bottom: 1px solid #eee;
-            background-color: #f9f9f9; /* 建议增加背景色，防止图片比例不符时留白处太突兀 */
+            background-color: #f9f9f9;
             transition: transform 0.3s ease;
         }
 
-/* 鼠标滑过时，图片稍微放大一点点，很有动感 */
-.card:hover img {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-}
-
-/* 别忘了在 .card img 里加上 transition 确保缩回去时也平滑 */
-
-}
+        .card:hover img {
+            transform: scale(1.05);
+        }
 
         .card-content {
             padding: 20px;
@@ -95,11 +116,6 @@
             transition: color 0.2s;
         }
 
-        .card-content h3 a:hover {
-            color: #40a9ff;
-            text-decoration: underline;
-        }
-
         .card-content p {
             color: #666;
             font-size: 0.95rem;
@@ -107,19 +123,23 @@
             margin: 0;
         }
 
-        /* 响应式微调 */
         @media (max-width: 600px) {
             .gallery {
                 grid-template-columns: 1fr;
             }
         }
     </style>
+<link rel="alternate" type="application/rss+xml" title="大流量卡订阅" href="feed.xml" />
+
 </head>
 <body>
 
 <header>
     <h1>官方正规大流量卡</h1>
     <p>5G 高速流量 · 海量套餐任你选</p>
+    <a href="feed.xml" class="rss-btn" target="_blank">
+        <i class="fas fa-rss"></i> RSS 订阅新套餐
+    </a>
 </header>
 
 <div class="gallery">
@@ -132,37 +152,7 @@
             <p>19元/29元起，享百G超大流量。官方正规号卡，顺丰包邮，首月免费体验。</p>
         </div>
     </div>
-
-    <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/2.png" alt="中国移動大流量卡">
-        </a>
-        <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">中国电信 · 百G流量卡</a></h3>
-            <p>想要体验无忧畅爽的上网体验吗？立即光顾我们的店铺，挑选一张优质流量卡吧！我们提供稳定可靠的网络服务，同时还有丰富的福利等待着您，让您的上网体验更加随心舒适。</p>
-        </div>
     </div>
-    
-    <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/3.png" alt="中国联通大流量卡">
-        </a>
-        <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">中国电信 · 百G流量卡</a></h3>
-            <p>大流量卡火热来袭！推荐一款超值的流量套餐，图片写着多少就是每个月多少流量，无套餐，无合约。</p>
-        </div>
-    </div>
-    
-    <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/0.png" alt="大流量卡">
-        </a>
-        <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">中国电信 · 百G流量卡</a></h3>
-            <p>2026年手机卡新王诞生！这届流量卡到底有多牛？热门电话卡套餐推荐，来我的店铺领取吧</p>
-        </div>
-    </div>
-    
 
 </body>
 </html>
