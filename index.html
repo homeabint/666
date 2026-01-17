@@ -206,7 +206,32 @@
 
 
 <script>
-    // 语言切换函数
+// 1. 语言切换函数 (修复按了没反应的问题)
+function switchLang(lang) {
+    // 修改 HTML 根标签语言
+    document.getElementById('html-tag').lang = (lang === 'en' ? 'en-US' : 'zh-CN');
+    
+    // 切换所有带有 .lang-text 类的文字内容
+    const elements = document.querySelectorAll('.lang-text');
+    elements.forEach(el => {
+        el.innerText = el.getAttribute('data-' + lang);
+    });
+    
+    // 切换按钮的激活状态样式
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    
+    // 保持用户偏好
+    localStorage.setItem('pref-lang', lang);
+}
+
+// 2. 初始化加载
+window.onload = () => {
+    const savedLang = localStorage.getItem('pref-lang') || 'zh';
+    switchLang(savedLang);
+};
+
+// 3. 终极版 RSS 生成函数 (支持图片与双语)
 function generateRSS() {
     const isEn = document.getElementById('html-tag').lang === 'en-US';
     const cards = document.querySelectorAll('.card');
@@ -217,9 +242,12 @@ function generateRSS() {
         const descEl = card.querySelector('p');
         const imgEl = card.querySelector('img');
         
+        // 抓取当前语言对应的属性
         const title = isEn ? titleEl.getAttribute('data-en') : titleEl.getAttribute('data-zh');
         const desc = isEn ? descEl.getAttribute('data-en') : descEl.getAttribute('data-zh');
         const link = titleEl.href;
+        
+        // 关键：获取绝对路径图片地址
         const absoluteImgUrl = imgEl.src; 
 
         itemsXml += `
@@ -227,7 +255,7 @@ function generateRSS() {
         <title><![CDATA[${title}]]></title>
         <link>${link}</link>
         <description><![CDATA[
-            <div style="margin-bottom:10px;"><img src="${absoluteImgUrl}" style="width:100%" /></div>
+            <div style="margin-bottom:10px;"><img src="${absoluteImgUrl}" style="width:100%;max-width:400px;" /></div>
             <p>${desc}</p>
         ]]></description>
         <pubDate>${new Date().toUTCString()}</pubDate>
@@ -242,14 +270,15 @@ function generateRSS() {
 <channel>
     <title>${isEn ? 'High-Data SIM Cards' : '官方正规大流量卡'}</title>
     <link>${window.location.href}</link>
-    <description>Latest 5G Data Plans</description>
+    <description>${isEn ? 'Official 5G High Speed SIM Cards' : '最新5G大流量套餐更新'}</description>
     <language>${isEn ? 'en-us' : 'zh-cn'}</language>
     ${itemsXml}
 </channel>
 </rss>`;
 
+    console.log("%c--- " + (isEn ? "EN" : "ZH") + " RSS XML GENERATED ---", "color: #ff9900; font-weight: bold;");
     console.log(fullXml);
-    alert("终极图片版 RSS 代码已在控制台生成！");
+    alert("RSS代码已在控制台生成！\n当前语言: " + (isEn ? "English" : "中文") + "\n请按 F12 复制。");
 }
 
 
