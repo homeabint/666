@@ -126,7 +126,62 @@
             }
         }
     </style>
+
+
+/* RSS 悬浮按钮样式 */
+.rss-float {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #ff9900; /* RSS 经典橙色 */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.rss-float:hover {
+    transform: scale(1.1) rotate(15deg);
+    background-color: #e68a00;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* 提示文字（可选） */
+.rss-float::before {
+    content: "RSS";
+    position: absolute;
+    right: 60px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.rss-float:hover::before {
+    opacity: 1;
+}
+
+
+
 </head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<a href="feed.xml" class="rss-float" target="_blank" title="RSS Feed">
+    <i class="fas fa-rss fa-lg"></i>
+</a>
+
 <body>
 
 <header>
