@@ -1,131 +1,7 @@
 <!doctype html>
-<html lang="zh-cn">
-<head>
-
-<meta name="google-adsense-account" content="ca-pub-9585799645228530">
-    <meta charset="utf-8">
-
-    <style>
-        /* 右上角定位样式 */
-        .top-right-date {
-            position: fixed; /* 固定在浏览器窗口 */
-            top: -10px;       /* 距离顶部 20 像素 */
-            right: 80px;     /* 距离右侧 20 像素 */
-            
-            /* 美化样式 */
-            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
-            backdrop-filter: blur(10px);         /* 磨砂效果 */
-            padding: 10px 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.3);
-            
-            /* 字体设置 */
-            font-family: "sf pro display", "pingfang sc", "microsoft yahei", sans-serif;
-            font-size: 16px;
-            font-weight: 500;
-            color: #333;
-            z-index: 9999; /* 确保显示在最上层 */
-        }
-
-        /* 新增：图片按钮容器样式 */
-        .image-buttons-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 每排4个 */
-            gap: 15px; /* 按钮之间的间距 */
-            width: 90%; /* 宽度与gallery一致 */
-            max-width: 1200px;
-            margin: 20px auto 30px auto; /* 上下间距 */
-            justify-items: center; /* 居中对齐 */
-        }
-
-        .image-button {
-            width: 100%; /* 确保图片按钮占满分配的格子 */
-            max-width: 220px; /* 限制最大宽度 */
-            aspect-ratio: 1 / 1; /* 保持正方形 */
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            background-color: #fff; /* 背景色以防图片加载失败 */
-            display: flex; /* 用于图片居中 */
-            align-items: center;
-            justify-content: center;
-        }
-
-        .image-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .image-button img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 裁剪图片以填充容器 */
-            display: block;
-            border-radius: 12px; /* 与容器相同的圆角 */
-        }
-
-        /* 针对移动端的图片按钮布局 */
-        @media (max-width: 768px) {
-            .image-buttons-container {
-                grid-template-columns: repeat(2, 1fr); /* 小屏幕改为每排2个 */
-                gap: 10px;
-                width: 95%;
-            }
-            .top-right-date {
-                font-size: 14px; /* 移动端字体小一点 */
-                right: 10px;
-                top: 10px;
-                padding: 8px 12px;
-                border-radius: 8px;
-            }
-            .image-button {
-                max-width: 160px; /* 移动端按钮尺寸调整 */
-            }
-        }
-        @media (max-width: 480px) {
-            .image-buttons-container {
-                grid-template-columns: repeat(2, 1fr); /* 最小屏幕依然每排2个 */
-                gap: 8px;
-            }
-            .image-button {
-                max-width: 140px; /* 最小屏幕按钮尺寸进一步调整 */
-            }
-        }
-
-    </style>
-</head>
-<body>
-
-    <div id="date-display" class="top-right-date">加载中...</div>
-
-    <script>
-        function showrealtime() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = now.getMonth() + 1;
-            const day = now.getDate();
-            
-            // 获取星期
-            const weekdays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-            const week = weekdays[now.getDay()];
-
-            // 格式化：2026年1月17日 星期六
-            document.getElementById('date-display').innerText = `${year}年${month}月${day}日 ${week}`;
-        }
-
-        // 立即执行并每小时更新一次
-        showrealtime();
-        setInterval(showrealtime, 3600000);
-    </script>
-</body>
-</html>
-
-
-
 <html lang="zh-cn" id="html-tag">
 <head>
+    <meta name="google-adsense-account" content="ca-pub-9585799645228530">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2026 官方正规大流量卡中心</title>
@@ -133,37 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-
-.footer-banner {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto 50px auto; /* 上下外邊距 */
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.footer-banner img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s;
-}
-
-.footer-banner img:hover {
-    transform: scale(1.02); /* 滑鼠懸停稍微放大 */
-}
-
-/* 針對移動端的適配 */
-@media (max-width: 600px) {
-    .footer-banner {
-        width: 94%;
-        margin-bottom: 100px; /* 為左側機器人按鈕留出空間 */
-    }
-}
-
-
-
+        /* --- 基础样式 --- */
         :root {
             --primary-blue: #1890ff;
             --dark-blue: #001529;
@@ -179,7 +25,18 @@
             color: var(--text-main); overflow-x: hidden;
         }
 
-        /* --- header --- */
+        /* --- 右上角日期 --- */
+        .top-right-date {
+            position: fixed; top: 10px; right: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 8px 15px; border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            font-size: 14px; font-weight: 500; color: #333; z-index: 9999;
+        }
+
+        /* --- Header --- */
         header {
             background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
             color: white; width: 100%; padding: 2rem 0; text-align: center;
@@ -192,66 +49,75 @@
         }
         .lang-switcher button.active { background: white; color: var(--primary-blue); font-weight: bold; }
 
-        /* --- gallery --- */
+        /* --- 8个图片按钮布局 --- */
+        .image-buttons-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px; width: 90%; max-width: 1000px;
+            margin: 25px auto 10px auto;
+            justify-items: center;
+        }
+
+        .image-item {
+            display: flex; flex-direction: column; align-items: center;
+            text-decoration: none; width: 100%;
+        }
+
+        .btn-label {
+            font-size: 14px; font-weight: bold; color: #fff;
+            margin-bottom: 8px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .image-button {
+            width: 100%; max-width: 220px; aspect-ratio: 1 / 1;
+            overflow: hidden; border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: 0.3s; background: #fff;
+        }
+
+        .image-item:hover .image-button { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .image-button img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- Gallery --- */
         .gallery {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px; width: 90%; max-width: 1200px; padding-bottom: 100px;
+            gap: 25px; width: 90%; max-width: 1200px; padding-bottom: 50px;
         }
-        .card {
-            background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-            overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
-        }
+        .card { background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); overflow: hidden; transition: 0.3s; }
         .card:hover { transform: translateY(-8px); }
-        .card img { 
-            width: 100%; aspect-ratio: 4 / 3; object-fit: contain; 
-            background-color: #f9f9f9; border-bottom: 1px solid #eee; 
-        }
+        .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background-color: #f9f9f9; }
         .card-content { padding: 20px; }
         .card-content h3 a { text-decoration: none; color: var(--primary-blue); }
 
-        /* --- floating buttons --- */
-        .rss-float {
-            position: fixed; right: 20px; bottom: 20px; width: 52px; height: 52px;
-            background-color: #ff9900; color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; z-index: 1000;
-        }
-        #chatbot-launcher {
-            position: fixed; left: 20px; bottom: 20px; width: 52px; height: 52px;
-            background-color: var(--primary-blue); color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000;
-        }
+        /* --- Footer --- */
+        .footer-banner { width: 90%; max-width: 1200px; margin: 20px auto 100px auto; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .footer-banner img { width: 100%; height: auto; display: block; transition: 0.5s; }
 
-        /* --- chat window --- */
-        #chatbot-container {
-            position: fixed; left: 20px; bottom: 85px; width: 340px; height: 500px;
-            background: white; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.18);
-            display: none; flex-direction: column; z-index: 1001; overflow: hidden;
-        }
+        /* --- 漂浮按钮 & 聊天 --- */
+        .rss-float { position: fixed; right: 20px; bottom: 20px; width: 52px; height: 52px; background: #ff9900; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        #chatbot-launcher { position: fixed; left: 20px; bottom: 20px; width: 52px; height: 52px; background: var(--primary-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; }
+        #chatbot-container { position: fixed; left: 20px; bottom: 85px; width: 340px; height: 500px; background: white; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.18); display: none; flex-direction: column; z-index: 1001; overflow: hidden; }
         #chat-header { background: var(--primary-blue); color: white; padding: 16px; display: flex; justify-content: space-between; }
         #chat-messages { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9fa; display: flex; flex-direction: column; gap: 10px; }
-        
         .message-bubble { max-width: 80%; padding: 10px 14px; border-radius: 15px; font-size: 14px; }
         .user-message { align-self: flex-end; background: var(--primary-blue); color: white; border-bottom-right-radius: 2px; }
         .bot-message { align-self: flex-start; background: #eee; color: #333; border-bottom-left-radius: 2px; }
-        
-        /* 快捷按钮样式 */
-        .quick-replies { padding: 10px; display: flex; flex-wrap: wrap; gap: 5px; background: #fff; border-top: 1px solid #eee; }
-        .quick-btn { 
-            font-size: 12px; padding: 5px 12px; border: 1px solid var(--primary-blue); 
-            color: var(--primary-blue); border-radius: 15px; cursor: pointer; background: #fff;
-        }
-
         .chat-input-area { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px; }
         #message-input { flex: 1; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; outline: none; }
         #send-button { background: var(--primary-blue); color: white; border: none; padding: 0 15px; border-radius: 20px; cursor: pointer; }
 
-        @media (max-width: 600px) {
-            .gallery { grid-template-columns: 1fr; width: 92%; }
-            #chatbot-container { width: 92vw; left: 4vw; height: 70vh; }
+        /* --- 响应式 --- */
+        @media (max-width: 768px) {
+            .image-buttons-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .btn-label { font-size: 12px; }
+            header h1 { font-size: 1.4rem; }
+            #chatbot-container { width: 92vw; left: 4vw; }
         }
     </style>
 </head>
 <body>
+
+<div id="date-display" class="top-right-date">加载中...</div>
 
 <a href="feed.xml" class="rss-float" target="_blank"><i class="fas fa-rss fa-lg"></i></a>
 <div id="chatbot-launcher" onclick="togglechat()"><i class="fas fa-robot fa-lg"></i></div>
@@ -262,8 +128,6 @@
         <span style="cursor:pointer" onclick="togglechat()">&times;</span>
     </div>
     <div id="chat-messages"></div>
-    <div class="quick-replies" id="quick-replies">
-        </div>
     <div class="chat-input-area">
         <input type="text" id="message-input" placeholder="想了解哪款流量卡？">
         <button id="send-button">发送</button>
@@ -273,90 +137,98 @@
 <header>
     <div class="lang-switcher">
         <button onclick="switchlang('zh')" id="btn-zh" class="active">中文</button>
-        <button onclick="switchlang('en')" id="btn-en">english</button>
+        <button onclick="switchlang('en')" id="btn-en">English</button>
     </div>
-    <h1 class="lang-text" data-zh="官方正规大流量卡" data-en="official sim cards"><i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i> 官方正规大流量卡 <i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i>
-</h1>
-    <p class="lang-text" data-zh="5g 高速流量 · 海量套餐任你选" data-en="5g high speed · multiple plans"><i class="fas fa-fire fa-beat" style="color: #ff4500;"></i> 
-5g 高速流量 · 海量套餐任你选 <i class="fas fa-fire fa-beat" style="color: #ff4500;"></i>
-</p>
+    <h1 class="lang-text" data-zh="官方正规大流量卡" data-en="Official SIM Cards">
+        <i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i> 官方正规大流量卡 <i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i>
+    </h1>
+    <p class="lang-text" data-zh="5G 高速流量 · 海量套餐任你选" data-en="5G High Speed · Multiple Plans">
+        <i class="fas fa-fire fa-beat" style="color: #ff4500;"></i> 5G 高速流量 · 海量套餐任你选 <i class="fas fa-fire fa-beat" style="color: #ff4500;"></i>
+    </p>
 
-
-
-            <p class="lang-text" data-zh="1号流量店铺"</p>
     <div class="image-buttons-container">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
-            <img src="img/b1.png" alt="按钮1">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
+            <span class="btn-label lang-text" data-zh="电信专区" data-en="Telecom">电信专区</span>
+            <div class="image-button"><img src="img/b1.png" alt="1"></div>
         </a>
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
-            <img src="img/b2.png" alt="按钮2">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
+            <span class="btn-label lang-text" data-zh="移动专区" data-en="Mobile">移动专区</span>
+            <div class="image-button"><img src="img/b2.png" alt="2"></div>
         </a>
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
-            <img src="img/b3.png" alt="按钮3">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
+            <span class="btn-label lang-text" data-zh="联通专区" data-en="Unicom">联通专区</span>
+            <div class="image-button"><img src="img/b3.png" alt="3"></div>
         </a>
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
-            <img src="img/b4.png" alt="按钮4">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
+            <span class="btn-label lang-text" data-zh="广电专区" data-en="CBN">广电专区</span>
+            <div class="image-button"><img src="img/b4.png" alt="4"></div>
         </a>
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
-            <img src="img/b5.png" alt="按钮5">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
+            <span class="btn-label lang-text" data-zh="订单查询" data-en="Orders">订单查询</span>
+            <div class="image-button"><img src="img/b5.png" alt="5"></div>
         </a>
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
-            <img src="img/b6.png" alt="按钮6">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
+            <span class="btn-label lang-text" data-zh="激活视频" data-en="Activate">激活视频</span>
+            <div class="image-button"><img src="img/b6.png" alt="6"></div>
         </a>
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
-            <img src="img/b7.png" alt="按钮7">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
+            <span class="btn-label lang-text" data-zh="售后客服" data-en="Support">售后客服</span>
+            <div class="image-button"><img src="img/b7.png" alt="7"></div>
         </a>
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
-            <img src="img/b8.png" alt="按钮8">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
+            <span class="btn-label lang-text" data-zh="申请必看" data-en="Must Read">申请必看</span>
+            <div class="image-button"><img src="img/b8.png" alt="8"></div>
         </a>
     </div>
-    </header>
-
+</header>
 
 <div class="gallery">
     <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
-            <img src="img/1.png" alt="card">
-        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank"><img src="img/1.png" alt="card"></a>
         <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百g流量卡" data-en="china telecom · 100gb plan">中国电信 · 百g流量卡</a></h3>
-            <p class="lang-text" data-zh="19元起，享百g超大流量。官方正规号卡。" data-en="from $19, 100gb+ data. official sim.">19元起，享百g超大流量。官方正规号卡。</p>
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百G流量卡" data-en="China Telecom · 100GB">中国电信 · 百G流量卡</a></h3>
+            <p class="lang-text" data-zh="19元起，享百G超大流量。官方正规号卡。" data-en="From $19, 100GB+ data. Official SIM.">19元起，享百G超大流量。官方正规号卡。</p>
         </div>
     </div>
-
     <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
-            <img src="img/2.png" alt="card">
-        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank"><img src="img/2.png" alt="card"></a>
         <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国移动 · 百g流量卡" data-en="china mobile · 100gb plan">中国移动 · 百g流量卡</a></h3>
-            <p class="lang-text" data-zh="优质流量卡挑选，稳定可靠。" data-en="premium data cards, stable and reliable.">优质流量卡挑选，稳定可靠。</p>
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国移动 · 百G流量卡" data-en="China Mobile · 100GB">中国移动 · 百G流量卡</a></h3>
+            <p class="lang-text" data-zh="优质流量卡挑选，稳定可靠。" data-en="Premium data cards, stable and reliable.">优质流量卡挑选，稳定可靠。</p>
         </div>
     </div>
-
     <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
-            <img src="img/3.png" alt="card">
-        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank"><img src="img/3.png" alt="card"></a>
         <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国联通 · 百g流量卡" data-en="china unicom · 100gb plan">中国联通 · 百g流量卡</a></h3>
-            <p class="lang-text" data-zh="大流量卡火热来袭！无套餐，无合约。" data-en="massive data plans! no fixed packages, no contracts.">大流量卡火热来袭！无套餐，无合约。</p>
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国联通 · 百G流量卡" data-en="China Unicom · 100GB">中国联通 · 百G流量卡</a></h3>
+            <p class="lang-text" data-zh="大流量卡火热来袭！无套餐，无合约。" data-en="Massive data plans! No contracts.">大流量卡火热来袭！无套餐，无合约。</p>
         </div>
     </div>
-
     <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
-            <img src="img/0.png" alt="card">
-        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank"><img src="img/0.png" alt="card"></a>
         <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="官方推荐 · 流量王" data-en="top recommended plan">官方推荐 · 流量王</a></h3>
-            <p class="lang-text" data-zh="2026年手机卡新王诞生！热门套餐推荐。" data-en="the new king of sim cards in 2026! best plans.">2026年手机卡新王诞生！热门套餐推荐。</p>
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="官方推荐 · 流量王" data-en="Top Recommended">官方推荐 · 流量王</a></h3>
+            <p class="lang-text" data-zh="2026年手机卡新王诞生！热门套餐推荐。" data-en="The new king of SIM cards in 2026!">2026年手机卡新王诞生！热门套餐推荐。</p>
         </div>
     </div>
 </div>
 
+<div class="footer-banner">
+    <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
+        <img src="img/01.png" alt="Banner" onerror="this.src='https://via.placeholder.com/1200x300?text=Official+Promotion'">
+    </a>
+</div>
+
 <script>
-/* --- 基础逻辑 --- */
+/* --- 日期逻辑 --- */
+function showrealtime() {
+    const now = new Date();
+    const weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    document.getElementById('date-display').innerText = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${weekDays[now.getDay()]}`;
+}
+setInterval(showrealtime, 3600000); showrealtime();
+
+/* --- 语言切换 --- */
 function switchlang(lang) {
     document.getElementById('html-tag').lang = (lang === 'en' ? 'en-us' : 'zh-cn');
     document.querySelectorAll('.lang-text').forEach(el => {
@@ -366,63 +238,27 @@ function switchlang(lang) {
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 }
 
+/* --- 聊天机器人 --- */
 function togglechat() {
     const chat = document.getElementById('chatbot-container');
     chat.style.display = (chat.style.display === 'none' || chat.style.display === '') ? 'flex' : 'none';
 }
 
-/* --- ai 客服类 --- */
 class Chatbot {
     constructor() {
-        this.knowledgebase = {
-            '电信卡': '电信卡信号稳、流量多，首选推荐！',
-            '怎么下单': '选择套餐立即领取极速发货！',
-            '移动卡': '移动基站多，山区信号也杠杠的！',
-            '联通卡': '联通卡网速快，玩游戏刷视频神器！',
-            '订单': '请提供下单手机号，为您查询进度。',
-            '需要': '好的！点击页面卡片图片即可直接申请哦！',
-            '人工客服': '当前人工繁忙，请先咨询智能助手。'
-        };
-        this.init();
-    }
-
-    init() {
         this.msgbox = document.getElementById('chat-messages');
         this.input = document.getElementById('message-input');
-        this.quickbox = document.getElementById('quick-replies');
-        
         document.getElementById('send-button').onclick = () => this.handlesend();
-        this.input.onkeypress = (e) => { if(e.key === 'Enter') this.handlesend(); }; // 注意：'enter' 改为 'Enter'
-        
-        // 生成快捷按钮
-        const quicks = ['电信卡', '移动卡', '联通卡', '订单查询'];
-        quicks.forEach(q => {
-            const btn = document.createElement('button');
-            btn.className = 'quick-btn';
-            btn.innerText = q;
-            btn.onclick = () => { this.addmessage(q, 'user'); this.process(q); };
-            this.quickbox.appendChild(btn);
-        });
-
-        this.addmessage('尊贵的客人，想了解哪款 5g 大流量卡？', 'bot');
+        this.input.onkeypress = (e) => { if(e.key === 'Enter') this.handlesend(); };
+        this.addmessage('尊贵的客人，想了解哪款 5G 大流量卡？', 'bot');
     }
-
     handlesend() {
         const val = this.input.value.trim();
         if(!val) return;
         this.addmessage(val, 'user');
         this.input.value = '';
-        this.process(val);
+        setTimeout(() => this.addmessage('收到！正在为您查询最新优惠...', 'bot'), 600);
     }
-
-    process(msg) {
-        let reply = '亲亲，您可以咨询“电信卡”或“怎么下单”哦！';
-        for(let key in this.knowledgebase) {
-            if(msg.includes(key)) { reply = this.knowledgebase[key]; break; }
-        }
-        setTimeout(() => this.addmessage(reply, 'bot'), 600); // 注意：settimeout 改为 setTimeout
-    }
-
     addmessage(text, sender) {
         const div = document.createElement('div');
         div.className = `message-bubble ${sender === 'user' ? 'user-message' : 'bot-message'}`;
@@ -431,16 +267,8 @@ class Chatbot {
         this.msgbox.scrollTop = this.msgbox.scrollHeight;
     }
 }
-
-window.onload = () => { new Chatbot(); }; // 注意：chatbot 改为 Chatbot
+window.onload = () => { new Chatbot(); };
 </script>
-
-
-<div class="footer-banner">
-    <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
-        <img src="img/01.png" alt="官方正版號卡" onerror="this.src='https://via.placeholder.com/1200x300?text=official+sim+card+promotion'">
-    </a>
-</div>
 
 </body>
 </html>
