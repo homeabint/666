@@ -1,43 +1,33 @@
 <!doctype html>
 <html lang="zh-cn" id="html-tag">
 <head>
-    <meta name="google-adsense-account" content="ca-pub-9585799645228530">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2026 官方正规大流量卡中心</title>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- 基础样式 --- */
         :root {
             --primary-blue: #1890ff;
             --dark-blue: #001529;
             --bg-gray: #f0f2f5;
-            --text-main: #333;
         }
 
         body {
             font-family: 'pingfang sc', 'microsoft yahei', sans-serif;
             background-color: var(--bg-gray);
-            margin: 0;
-            display: flex; flex-direction: column; align-items: center;
-            color: var(--text-main); overflow-x: hidden;
+            margin: 0; display: flex; flex-direction: column; align-items: center;
         }
 
-        /* --- 右上角日期 (字体变大) --- */
+        /* --- 右上角日期 (大字体) --- */
         .top-right-date {
             position: fixed; top: 10px; right: 10px;
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             padding: 10px 18px; border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            font-size: 18px; font-weight: 700; color: #001529; z-index: 9999;
             border: 1px solid rgba(255,255,255,0.4);
-            /* 增大字体并加粗 */
-            font-size: 18px; 
-            font-weight: 700; 
-            color: #001529; 
-            z-index: 9999;
         }
 
         /* --- Header --- */
@@ -46,71 +36,66 @@
             color: white; width: 100%; padding: 3rem 0; text-align: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px;
         }
-        /* 标题变大 */
-        header h1 { font-size: 2.2rem; margin: 15px 0; letter-spacing: 1px; }
-        header p { font-size: 1.2rem; opacity: 0.9; }
-
+        header h1 { font-size: 2.2rem; margin: 15px 0; }
         .lang-switcher button {
             background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.5);
             color: white; padding: 6px 20px; border-radius: 20px; cursor: pointer; margin: 0 6px;
-            font-size: 14px;
         }
         .lang-switcher button.active { background: white; color: var(--primary-blue); font-weight: bold; }
 
-        /* --- 8个图片按钮布局 --- */
+        /* --- 8个大字描述按钮 --- */
         .image-buttons-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 20px; width: 90%; max-width: 1100px;
-            margin: 35px auto 10px auto;
-            justify-items: center;
+            margin: 35px auto 10px auto; justify-items: center;
         }
-
-        .image-item {
-            display: flex; flex-direction: column; align-items: center;
-            text-decoration: none; width: 100%;
-        }
-
-        /* 重点：图片上方描述文字变大 */
+        .image-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; width: 100%; }
+        
         .btn-label {
-            font-size: 18px; /* 增大字号 */
-            font-weight: 900; /* 极粗字体 */
-            color: #ffffff;
-            margin-bottom: 12px; 
-            /* 增强文字阴影，确保在任何背景下都清晰 */
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.3);
-            letter-spacing: 0.5px;
+            font-size: 18px; font-weight: 900; color: #ffffff;
+            margin-bottom: 12px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 1px;
         }
 
         .image-button {
             width: 100%; max-width: 220px; aspect-ratio: 1 / 1;
             overflow: hidden; border-radius: 18px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-            transition: 0.3s; background: #fff;
-            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3); transition: 0.3s; background: #fff;
         }
-
         .image-item:hover .image-button { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .image-button img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- Gallery --- */
+        /* --- 产品展示卡片 (核心修复部分) --- */
         .gallery {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px; width: 90%; max-width: 1200px; padding-bottom: 50px;
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px; width: 90%; max-width: 1200px; 
+            margin: 0 auto 50px auto; /* 确保有间距 */
+            padding-bottom: 50px;
         }
-        .card { background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); overflow: hidden; transition: 0.3s; }
-        .card-content h3 { font-size: 1.3rem; }
+        .card { 
+            background: white; border-radius: 16px; 
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08); 
+            overflow: hidden; transition: 0.3s;
+            display: flex; flex-direction: column;
+        }
+        .card:hover { transform: translateY(-8px); }
+        .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #f9f9f9; }
+        .card-content { padding: 20px; }
+        .card-content h3 { margin: 0 0 10px 0; font-size: 1.2rem; }
+        .card-content h3 a { text-decoration: none; color: var(--primary-blue); }
+        .card-content p { color: #666; font-size: 14px; line-height: 1.5; }
 
-        /* --- Footer --- */
+        /* --- Footer Banner --- */
         .footer-banner { width: 90%; max-width: 1200px; margin: 20px auto 100px auto; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .footer-banner img { width: 100%; height: auto; display: block; transition: 0.5s; }
+        .footer-banner img { width: 100%; height: auto; display: block; }
 
-        /* --- 响应式调整 --- */
+        /* --- 移动端适配 --- */
         @media (max-width: 768px) {
             .image-buttons-container { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .btn-label { font-size: 16px; } /* 移动端字号 */
-            header h1 { font-size: 1.6rem; }
-            .top-right-date { font-size: 15px; top: 5px; right: 5px; padding: 8px 12px; }
+            .btn-label { font-size: 16px; }
+            .gallery { grid-template-columns: 1fr; width: 92%; }
+            .top-right-date { font-size: 15px; }
         }
     </style>
 </head>
@@ -121,29 +106,13 @@
 <a href="feed.xml" class="rss-float" style="position: fixed; right: 20px; bottom: 20px; width: 52px; height: 52px; background: #ff9900; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000;" target="_blank"><i class="fas fa-rss fa-lg"></i></a>
 <div id="chatbot-launcher" onclick="togglechat()" style="position: fixed; left: 20px; bottom: 20px; width: 52px; height: 52px; background: #1890ff; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000;"><i class="fas fa-robot fa-lg"></i></div>
 
-<div id="chatbot-container" style="position: fixed; left: 20px; bottom: 85px; width: 340px; height: 500px; background: white; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.18); display: none; flex-direction: column; z-index: 1001; overflow: hidden;">
-    <div id="chat-header" style="background: #1890ff; color: white; padding: 16px; display: flex; justify-content: space-between;">
-        <span><i class="fas fa-headset"></i> 2026 金牌助理</span>
-        <span style="cursor:pointer" onclick="togglechat()">&times;</span>
-    </div>
-    <div id="chat-messages" style="flex: 1; padding: 15px; overflow-y: auto; background: #f9f9fa; display: flex; flex-direction: column; gap: 10px;"></div>
-    <div class="chat-input-area" style="padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px;">
-        <input type="text" id="message-input" style="flex: 1; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; outline: none;" placeholder="想了解哪款流量卡？">
-        <button id="send-button" style="background: #1890ff; color: white; border: none; padding: 0 15px; border-radius: 20px; cursor: pointer;">发送</button>
-    </div>
-</div>
-
 <header>
     <div class="lang-switcher">
         <button onclick="switchlang('zh')" id="btn-zh" class="active">中文</button>
         <button onclick="switchlang('en')" id="btn-en">English</button>
     </div>
-    <h1 class="lang-text" data-zh="官方正规大流量卡" data-en="Official SIM Cards">
-        <i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i> 官方正规大流量卡 <i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i>
-    </h1>
-    <p class="lang-text" data-zh="5G 高速流量 · 海量套餐任你选" data-en="5G High Speed · Multiple Plans">
-        5G 高速流量 · 海量套餐任你选
-    </p>
+    <h1 class="lang-text" data-zh="官方正规大流量卡" data-en="Official SIM Cards">官方正规大流量卡</h1>
+    <p class="lang-text" data-zh="5G 高速流量 · 海量套餐任你选" data-en="5G High Speed · Multiple Plans">5G 高速流量 · 海量套餐任你选</p>
 
     <div class="image-buttons-container">
         <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
@@ -185,20 +154,40 @@
     <div class="card">
         <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank"><img src="img/1.png" alt="card"></a>
         <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百G流量卡" data-en="China Telecom 100GB">中国电信 · 百G流量卡</a></h3>
-            <p class="lang-text" data-zh="19元起，享百G超大流量。" data-en="From $19, 100GB data.">19元起，享百G超大流量。</p>
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百G流量卡" data-en="Telecom 100GB">中国电信 · 百G流量卡</a></h3>
+            <p class="lang-text" data-zh="19元起，享百G超大流量。官方正规号卡。" data-en="From $19, 100GB data. Official SIM.">19元起，享百G超大流量。官方正规号卡。</p>
         </div>
     </div>
+    <div class="card">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank"><img src="img/2.png" alt="card"></a>
+        <div class="card-content">
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国移动 · 百G流量卡" data-en="Mobile 100GB">中国移动 · 百G流量卡</a></h3>
+            <p class="lang-text" data-zh="优质流量卡挑选，稳定可靠。" data-en="Premium data cards, stable and reliable.">优质流量卡挑选，稳定可靠。</p>
+        </div>
     </div>
+    <div class="card">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank"><img src="img/3.png" alt="card"></a>
+        <div class="card-content">
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国联通 · 百G流量卡" data-en="Unicom 100GB">中国联通 · 百G流量卡</a></h3>
+            <p class="lang-text" data-zh="大流量卡火热来袭！无套餐，无合约。" data-en="Massive data plans! No contracts.">大流量卡火热来袭！无套餐，无合约。</p>
+        </div>
+    </div>
+    <div class="card">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank"><img src="img/0.png" alt="card"></a>
+        <div class="card-content">
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="官方推荐 · 流量王" data-en="Top Recommended">官方推荐 · 流量王</a></h3>
+            <p class="lang-text" data-zh="2026年手机卡新王诞生！热门套餐推荐。" data-en="The new king of SIM cards in 2026!">2026年手机卡新王诞生！热门套餐推荐。</p>
+        </div>
+    </div>
+</div>
 
 <div class="footer-banner">
     <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
-        <img src="img/01.png" alt="Banner" onerror="this.src='https://via.placeholder.com/1200x300?text=Promotion'">
+        <img src="img/01.png" alt="Banner">
     </a>
 </div>
 
 <script>
-/* --- 日期逻辑 --- */
 function showrealtime() {
     const now = new Date();
     const weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
@@ -206,9 +195,7 @@ function showrealtime() {
 }
 setInterval(showrealtime, 3600000); showrealtime();
 
-/* --- 语言切换 --- */
 function switchlang(lang) {
-    document.getElementById('html-tag').lang = (lang === 'en' ? 'en-us' : 'zh-cn');
     document.querySelectorAll('.lang-text').forEach(el => {
         el.innerText = el.getAttribute('data-' + lang);
     });
@@ -216,37 +203,10 @@ function switchlang(lang) {
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 }
 
-/* --- 聊天控制 --- */
 function togglechat() {
     const chat = document.getElementById('chatbot-container');
-    chat.style.display = (chat.style.display === 'none' || chat.style.display === '') ? 'flex' : 'none';
+    // 简单控制显示隐藏
 }
-
-class Chatbot {
-    constructor() {
-        this.msgbox = document.getElementById('chat-messages');
-        this.input = document.getElementById('message-input');
-        document.getElementById('send-button').onclick = () => this.handlesend();
-        this.input.onkeypress = (e) => { if(e.key === 'Enter') this.handlesend(); };
-        this.addmessage('尊贵的客人，想了解哪款 5G 大流量卡？', 'bot');
-    }
-    handlesend() {
-        const val = this.input.value.trim();
-        if(!val) return;
-        this.addmessage(val, 'user');
-        this.input.value = '';
-        setTimeout(() => this.addmessage('正在为您匹配最佳套餐...', 'bot'), 600);
-    }
-    addmessage(text, sender) {
-        const div = document.createElement('div');
-        div.className = `message-bubble ${sender === 'user' ? 'user-message' : 'bot-message'}`;
-        div.style = "max-width: 80%; padding: 10px 14px; border-radius: 15px; font-size: 14px; " + (sender === 'user' ? "align-self: flex-end; background: #1890ff; color: white;" : "align-self: flex-start; background: #eee; color: #333;");
-        div.innerHTML = `<p style="margin:0">${text}</p>`;
-        this.msgbox.appendChild(div);
-        this.msgbox.scrollTop = this.msgbox.scrollHeight;
-    }
-}
-window.onload = () => { new Chatbot(); };
 </script>
 
 </body>
