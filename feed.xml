@@ -1,49 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0">
 <channel>
-    <title>官方正规大流量卡</title>
-    <link>https://ym.kashijiehaoka.cn/</link>
-    <description>最新5G大流量套餐更新 - 5G高速流量 · 海量套餐任你选</description>
-    <language>zh-cn</language>
-    <lastBuildDate>Sat, 17 Jan 2026 11:15:00 GMT</lastBuildDate>
-
-    <item>
-        <title><![CDATA[中国电信 · 百G流量卡 (19元/29元起)]]></title>
-        <link>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798</link>
-        <description><![CDATA[
-            <div style="margin-bottom:10px;">
-                <img src="https://ym.kashijiehaoka.cn/img/1.png" style="width:100%; max-width:400px; display:block;" />
-            </div>
-            <p>19元/29元起，享百G超大流量。官方正规号卡，顺丰包邮，首月免费体验。</p>
-        ]]></description>
-        <pubDate>Sat, 17 Jan 2026 11:15:00 GMT</pubDate>
-        <guid isPermaLink="false">ym-card-1-v2026</guid>
-        <enclosure url="https://ym.kashijiehaoka.cn/img/1.png" type="image/png" length="0" />
-        <media:content url="https://ym.kashijiehaoka.cn/img/1.png" medium="image" type="image/png" />
-    </item>
-
-    <item>
-        <title><![CDATA[中国电信 · 5G无忧卡 (精品推荐)]]></title>
-        <link>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798</link>
-        <description><![CDATA[
-            <div style="margin-bottom:10px;">
-                <img src="https://ym.kashijiehaoka.cn/img/2.png" style="width:100%; max-width:400px; display:block;" />
-            </div>
-            <p>挑选一张优质流量卡，提供稳定可靠的网络服务，让上网体验随心舒适。</p>
-        ]]></description>
-        <pubDate>Sat, 17 Jan 2026 11:15:00 GMT</pubDate>
-        <guid isPermaLink="false">ym-card-2-v2026</guid>
-        <enclosure url="https://ym.kashijiehaoka.cn/img/2.png" type="image/png" length="0" />
-        <media:content url="https://ym.kashijiehaoka.cn/img/2.png" medium="image" type="image/png" />
-    </item>
-
-    <item>
-        <title><![CDATA[中国联通 · 超大流量卡 (无合约)]]></title>
-        <link>https://ym.kashijiehaoka.cn/?s=fphsL5K6411798</link>
-        <description><![CDATA[
-            <div style="margin-bottom:10px;">
-                <img src="https://ym.kashijiehaoka.cn/img/3.png" style="width:100%; max-width:400px; display:block;" />
-            </div>
-            <p>超值流量套餐，无套餐约束，无合约限制，火热来袭！</p>
-        ]]></description>
-        <pubDate>Sat, 17 Jan 2026 11:15:00 GMT</pubDate>
+  <title>2026 官方正规大流量卡中心</title>
+  <link>http://你的域名.com</link>
+  <description>最新的 5G 大流量卡资讯与优惠套餐</description>
+  <item>
+    <title>中国电信百G流量卡上线</title>
+    <link>http://你的域名.com</link>
+    <description>19元起享百G流量，全国通用。</description>
+  </item>
+</channel>
+</rss>
