@@ -1,10 +1,9 @@
-
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="zh-cn">
 <head>
 
 <meta name="google-adsense-account" content="ca-pub-9585799645228530">
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
 
     <style>
         /* 右上角定位样式 */
@@ -22,12 +21,79 @@
             border: 1px solid rgba(255,255,255,0.3);
             
             /* 字体设置 */
-            font-family: "SF Pro Display", "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-family: "sf pro display", "pingfang sc", "microsoft yahei", sans-serif;
             font-size: 16px;
             font-weight: 500;
             color: #333;
             z-index: 9999; /* 确保显示在最上层 */
         }
+
+        /* 新增：图片按钮容器样式 */
+        .image-buttons-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 每排4个 */
+            gap: 15px; /* 按钮之间的间距 */
+            width: 90%; /* 宽度与gallery一致 */
+            max-width: 1200px;
+            margin: 20px auto 30px auto; /* 上下间距 */
+            justify-items: center; /* 居中对齐 */
+        }
+
+        .image-button {
+            width: 100%; /* 确保图片按钮占满分配的格子 */
+            max-width: 220px; /* 限制最大宽度 */
+            aspect-ratio: 1 / 1; /* 保持正方形 */
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background-color: #fff; /* 背景色以防图片加载失败 */
+            display: flex; /* 用于图片居中 */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .image-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 裁剪图片以填充容器 */
+            display: block;
+            border-radius: 12px; /* 与容器相同的圆角 */
+        }
+
+        /* 针对移动端的图片按钮布局 */
+        @media (max-width: 768px) {
+            .image-buttons-container {
+                grid-template-columns: repeat(2, 1fr); /* 小屏幕改为每排2个 */
+                gap: 10px;
+                width: 95%;
+            }
+            .top-right-date {
+                font-size: 14px; /* 移动端字体小一点 */
+                right: 10px;
+                top: 10px;
+                padding: 8px 12px;
+                border-radius: 8px;
+            }
+            .image-button {
+                max-width: 160px; /* 移动端按钮尺寸调整 */
+            }
+        }
+        @media (max-width: 480px) {
+            .image-buttons-container {
+                grid-template-columns: repeat(2, 1fr); /* 最小屏幕依然每排2个 */
+                gap: 8px;
+            }
+            .image-button {
+                max-width: 140px; /* 最小屏幕按钮尺寸进一步调整 */
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -35,32 +101,32 @@
     <div id="date-display" class="top-right-date">加载中...</div>
 
     <script>
-        function showRealTime() {
+        function showrealtime() {
             const now = new Date();
             const year = now.getFullYear();
             const month = now.getMonth() + 1;
             const day = now.getDate();
             
             // 获取星期
-            const weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-            const week = weekDays[now.getDay()];
+            const weekdays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            const week = weekdays[now.getDay()];
 
             // 格式化：2026年1月17日 星期六
             document.getElementById('date-display').innerText = `${year}年${month}月${day}日 ${week}`;
         }
 
         // 立即执行并每小时更新一次
-        showRealTime();
-        setInterval(showRealTime, 3600000);
+        showrealtime();
+        setInterval(showrealtime, 3600000);
     </script>
 </body>
 </html>
 
 
 
-<html lang="zh-CN" id="html-tag">
+<html lang="zh-cn" id="html-tag">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2026 官方正规大流量卡中心</title>
     
@@ -106,14 +172,14 @@
         }
 
         body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            font-family: 'pingfang sc', 'microsoft yahei', sans-serif;
             background-color: var(--bg-gray);
             margin: 0;
             display: flex; flex-direction: column; align-items: center;
             color: var(--text-main); overflow-x: hidden;
         }
 
-        /* --- Header --- */
+        /* --- header --- */
         header {
             background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
             color: white; width: 100%; padding: 2rem 0; text-align: center;
@@ -126,7 +192,7 @@
         }
         .lang-switcher button.active { background: white; color: var(--primary-blue); font-weight: bold; }
 
-        /* --- Gallery --- */
+        /* --- gallery --- */
         .gallery {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px; width: 90%; max-width: 1200px; padding-bottom: 100px;
@@ -143,7 +209,7 @@
         .card-content { padding: 20px; }
         .card-content h3 a { text-decoration: none; color: var(--primary-blue); }
 
-        /* --- Floating Buttons --- */
+        /* --- floating buttons --- */
         .rss-float {
             position: fixed; right: 20px; bottom: 20px; width: 52px; height: 52px;
             background-color: #ff9900; color: white; border-radius: 50%;
@@ -155,7 +221,7 @@
             display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000;
         }
 
-        /* --- Chat Window --- */
+        /* --- chat window --- */
         #chatbot-container {
             position: fixed; left: 20px; bottom: 85px; width: 340px; height: 500px;
             background: white; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.18);
@@ -188,12 +254,12 @@
 <body>
 
 <a href="feed.xml" class="rss-float" target="_blank"><i class="fas fa-rss fa-lg"></i></a>
-<div id="chatbot-launcher" onclick="toggleChat()"><i class="fas fa-robot fa-lg"></i></div>
+<div id="chatbot-launcher" onclick="togglechat()"><i class="fas fa-robot fa-lg"></i></div>
 
 <div id="chatbot-container">
     <div id="chat-header">
         <span><i class="fas fa-headset"></i> 2026 金牌助理</span>
-        <span style="cursor:pointer" onclick="toggleChat()">&times;</span>
+        <span style="cursor:pointer" onclick="togglechat()">&times;</span>
     </div>
     <div id="chat-messages"></div>
     <div class="quick-replies" id="quick-replies">
@@ -206,63 +272,90 @@
 
 <header>
     <div class="lang-switcher">
-        <button onclick="switchLang('zh')" id="btn-zh" class="active">中文</button>
-        <button onclick="switchLang('en')" id="btn-en">English</button>
+        <button onclick="switchlang('zh')" id="btn-zh" class="active">中文</button>
+        <button onclick="switchlang('en')" id="btn-en">english</button>
     </div>
-    <h1 class="lang-text" data-zh="官方正规大流量卡" data-en="Official SIM Cards"><i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i> 官方正规大流量卡 <i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i>
+    <h1 class="lang-text" data-zh="官方正规大流量卡" data-en="official sim cards"><i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i> 官方正规大流量卡 <i class="fas fa-fire fa-fade" style="color: #ff4d4f;"></i>
 </h1>
-    <p class="lang-text" data-zh="5G 高速流量 · 海量套餐任你选" data-en="5G High Speed · Multiple Plans"><i class="fas fa-fire fa-beat" style="color: #ff4500;"></i> 
-5G 高速流量 · 海量套餐任你选 <i class="fas fa-fire fa-beat" style="color: #ff4500;"></i>
+    <p class="lang-text" data-zh="5g 高速流量 · 海量套餐任你选" data-en="5g high speed · multiple plans"><i class="fas fa-fire fa-beat" style="color: #ff4500;"></i> 
+5g 高速流量 · 海量套餐任你选 <i class="fas fa-fire fa-beat" style="color: #ff4500;"></i>
 </p>
-</header>
+
+    <div class="image-buttons-container">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
+            <img src="img/b1.png" alt="按钮1">
+        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
+            <img src="img/b2.png" alt="按钮2">
+        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
+            <img src="img/b3.png" alt="按钮3">
+        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
+            <img src="img/b4.png" alt="按钮4">
+        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
+            <img src="img/b5.png" alt="按钮5">
+        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
+            <img src="img/b6.png" alt="按钮6">
+        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
+            <img src="img/b7.png" alt="按钮7">
+        </a>
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-button">
+            <img src="img/b8.png" alt="按钮8">
+        </a>
+    </div>
+    </header>
 
 
 <div class="gallery">
     <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/1.png" alt="Card">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
+            <img src="img/1.png" alt="card">
         </a>
         <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百G流量卡" data-en="China Telecom · 100GB Plan">中国电信 · 百G流量卡</a></h3>
-            <p class="lang-text" data-zh="19元起，享百G超大流量。官方正规号卡。" data-en="From $19, 100GB+ data. Official SIM.">19元起，享百G超大流量。官方正规号卡。</p>
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国电信 · 百g流量卡" data-en="china telecom · 100gb plan">中国电信 · 百g流量卡</a></h3>
+            <p class="lang-text" data-zh="19元起，享百g超大流量。官方正规号卡。" data-en="from $19, 100gb+ data. official sim.">19元起，享百g超大流量。官方正规号卡。</p>
         </div>
     </div>
 
     <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/2.png" alt="Card">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
+            <img src="img/2.png" alt="card">
         </a>
         <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank" class="lang-text" data-zh="中国移动 · 百G流量卡" data-en="China Mobile · 100GB Plan">中国移动 · 百G流量卡</a></h3>
-            <p class="lang-text" data-zh="优质流量卡挑选，稳定可靠。" data-en="Premium data cards, stable and reliable.">优质流量卡挑选，稳定可靠。</p>
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国移动 · 百g流量卡" data-en="china mobile · 100gb plan">中国移动 · 百g流量卡</a></h3>
+            <p class="lang-text" data-zh="优质流量卡挑选，稳定可靠。" data-en="premium data cards, stable and reliable.">优质流量卡挑选，稳定可靠。</p>
         </div>
     </div>
 
     <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/3.png" alt="Card">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
+            <img src="img/3.png" alt="card">
         </a>
         <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank" class="lang-text" data-zh="中国联通 · 百G流量卡" data-en="China Unicom · 100GB Plan">中国联通 · 百G流量卡</a></h3>
-            <p class="lang-text" data-zh="大流量卡火热来袭！无套餐，无合约。" data-en="Massive data plans! No fixed packages, no contracts.">大流量卡火热来袭！无套餐，无合约。</p>
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="中国联通 · 百g流量卡" data-en="china unicom · 100gb plan">中国联通 · 百g流量卡</a></h3>
+            <p class="lang-text" data-zh="大流量卡火热来袭！无套餐，无合约。" data-en="massive data plans! no fixed packages, no contracts.">大流量卡火热来袭！无套餐，无合约。</p>
         </div>
     </div>
 
     <div class="card">
-        <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-            <img src="img/0.png" alt="Card">
+        <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
+            <img src="img/0.png" alt="card">
         </a>
         <div class="card-content">
-            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank" class="lang-text" data-zh="官方推荐 · 流量王" data-en="Top Recommended Plan">官方推荐 · 流量王</a></h3>
-            <p class="lang-text" data-zh="2026年手机卡新王诞生！热门套餐推荐。" data-en="The new king of SIM cards in 2026! Best plans.">2026年手机卡新王诞生！热门套餐推荐。</p>
+            <h3><a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="lang-text" data-zh="官方推荐 · 流量王" data-en="top recommended plan">官方推荐 · 流量王</a></h3>
+            <p class="lang-text" data-zh="2026年手机卡新王诞生！热门套餐推荐。" data-en="the new king of sim cards in 2026! best plans.">2026年手机卡新王诞生！热门套餐推荐。</p>
         </div>
     </div>
 </div>
 
 <script>
 /* --- 基础逻辑 --- */
-function switchLang(lang) {
-    document.getElementById('html-tag').lang = (lang === 'en' ? 'en-US' : 'zh-CN');
+function switchlang(lang) {
+    document.getElementById('html-tag').lang = (lang === 'en' ? 'en-us' : 'zh-cn');
     document.querySelectorAll('.lang-text').forEach(el => {
         el.innerText = el.getAttribute('data-' + lang);
     });
@@ -270,15 +363,15 @@ function switchLang(lang) {
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 }
 
-function toggleChat() {
+function togglechat() {
     const chat = document.getElementById('chatbot-container');
     chat.style.display = (chat.style.display === 'none' || chat.style.display === '') ? 'flex' : 'none';
 }
 
-/* --- AI 客服类 --- */
+/* --- ai 客服类 --- */
 class Chatbot {
     constructor() {
-        this.knowledgeBase = {
+        this.knowledgebase = {
             '电信卡': '电信卡信号稳、流量多，首选推荐！',
             '怎么下单': '选择套餐立即领取极速发货！',
             '移动卡': '移动基站多，山区信号也杠杠的！',
@@ -291,12 +384,12 @@ class Chatbot {
     }
 
     init() {
-        this.msgBox = document.getElementById('chat-messages');
+        this.msgbox = document.getElementById('chat-messages');
         this.input = document.getElementById('message-input');
-        this.quickBox = document.getElementById('quick-replies');
+        this.quickbox = document.getElementById('quick-replies');
         
-        document.getElementById('send-button').onclick = () => this.handleSend();
-        this.input.onkeypress = (e) => { if(e.key === 'Enter') this.handleSend(); };
+        document.getElementById('send-button').onclick = () => this.handlesend();
+        this.input.onkeypress = (e) => { if(e.key === 'Enter') this.handlesend(); }; // 注意：'enter' 改为 'Enter'
         
         // 生成快捷按钮
         const quicks = ['电信卡', '移动卡', '联通卡', '订单查询'];
@@ -304,45 +397,45 @@ class Chatbot {
             const btn = document.createElement('button');
             btn.className = 'quick-btn';
             btn.innerText = q;
-            btn.onclick = () => { this.addMessage(q, 'user'); this.process(q); };
-            this.quickBox.appendChild(btn);
+            btn.onclick = () => { this.addmessage(q, 'user'); this.process(q); };
+            this.quickbox.appendChild(btn);
         });
 
-        this.addMessage('尊贵的客人，想了解哪款 5G 大流量卡？', 'bot');
+        this.addmessage('尊贵的客人，想了解哪款 5g 大流量卡？', 'bot');
     }
 
-    handleSend() {
+    handlesend() {
         const val = this.input.value.trim();
         if(!val) return;
-        this.addMessage(val, 'user');
+        this.addmessage(val, 'user');
         this.input.value = '';
         this.process(val);
     }
 
     process(msg) {
         let reply = '亲亲，您可以咨询“电信卡”或“怎么下单”哦！';
-        for(let key in this.knowledgeBase) {
-            if(msg.includes(key)) { reply = this.knowledgeBase[key]; break; }
+        for(let key in this.knowledgebase) {
+            if(msg.includes(key)) { reply = this.knowledgebase[key]; break; }
         }
-        setTimeout(() => this.addMessage(reply, 'bot'), 600);
+        setTimeout(() => this.addmessage(reply, 'bot'), 600); // 注意：settimeout 改为 setTimeout
     }
 
-    addMessage(text, sender) {
+    addmessage(text, sender) {
         const div = document.createElement('div');
         div.className = `message-bubble ${sender === 'user' ? 'user-message' : 'bot-message'}`;
         div.innerHTML = `<p style="margin:0">${text}</p>`;
-        this.msgBox.appendChild(div);
-        this.msgBox.scrollTop = this.msgBox.scrollHeight;
+        this.msgbox.appendChild(div);
+        this.msgbox.scrollTop = this.msgbox.scrollHeight;
     }
 }
 
-window.onload = () => { new Chatbot(); };
+window.onload = () => { new Chatbot(); }; // 注意：chatbot 改为 Chatbot
 </script>
 
 
 <div class="footer-banner">
-    <a href="https://ym.kashijiehaoka.cn/?s=fphsL5K6411798" target="_blank">
-        <img src="img/01.png" alt="官方正版號卡" onerror="this.src='https://via.placeholder.com/1200x300?text=Official+SIM+Card+Promotion'">
+    <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank">
+        <img src="img/01.png" alt="官方正版號卡" onerror="this.src='https://via.placeholder.com/1200x300?text=official+sim+card+promotion'">
     </a>
 </div>
 
