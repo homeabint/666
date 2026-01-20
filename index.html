@@ -17,6 +17,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
+/* --- 頂部 Banner 優化 --- */
+.top-banner {
+    width: 90%;
+    max-width: 1200px;
+    margin: 15px auto; /* 居中並留白 */
+    border-radius: 12px; /* 圓角 */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 柔和陰影 */
+}
+
+.top-banner img {
+    width: 100%;
+    height: auto; /* 保持比例 */
+    display: block;
+}
+
         /* --- 基础样式 --- */
         :root {
             --primary-blue: #1890ff;
@@ -124,6 +140,15 @@
     </style>
 </head>
 <body>
+
+
+<div class="top-banner">
+    <a href="空白" target="_blank">
+        <img src="img/t1.jpg" alt="Banner" onerror="this.src='https://via.placeholder.com/750x300?text=2026+Official+Promotion'">
+    </a>
+</div>
+
+
 
 <div id="date-display" class="top-right-date">加载中...</div>
 
