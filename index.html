@@ -125,30 +125,34 @@
 
 
 
-        /* --- 响应式 --- */
-        @media (max-width: 768px) {
-            /* 強制移動端也維持每排 4 個按鈕 */
-            .image-buttons-container { 
-                grid-template-columns: repeat(4, 1fr); 
-                gap: 8px; /* 縮小間距以適應小螢幕 */
-                width: 95%; /* 稍微加寬容器利用空間 */
-            }
-            
-            /* 縮小標籤字體以免折行或重疊 */
-            .btn-label { 
-                font-size: 10px; 
-                white-space: nowrap; /* 避免文字斷行 */
-                transform: scale(0.9); /* 稍微縮小視覺尺寸 */
-            }
+/* --- 响应式 --- */
+@media (max-width: 768px) {
+    /* 強制移動端也維持每排 4 個按鈕 */
+    .image-buttons-container { 
+        grid-template-columns: repeat(4, 1fr) !important; /* 加入 !important 確保覆蓋 */
+        gap: 8px; /* 縮小間距，為按鈕騰出空間 */
+        width: 96%; /* 增加容器寬度，利用螢幕邊緣空間 */
+        padding: 0 2%; /* 微調內距 */
+    }
+    
+    /* 縮小標籤字體以免折行或重疊 */
+    .btn-label { 
+        font-size: 10px !important; 
+        white-space: nowrap; /* 禁止換行 */
+        transform: scale(0.9); /* 進一步縮小視覺比例 */
+        margin-bottom: 4px; /* 縮小與圖片的間距 */
+    }
 
-            header h1 { font-size: 1.4rem; }
-            #chatbot-container { width: 92vw; left: 4vw; }
-            
-            /* 調整圖片按鈕的圓角，在小螢幕上看起來更精緻 */
-            .image-button {
-                border-radius: 10px;
-            }
-        }
+    /* 確保圖片按鈕不會縮得太小 */
+    .image-button {
+        border-radius: 8px; /* 圓角調小一點更精緻 */
+    }
+
+    header h1 { font-size: 1.2rem; }
+    header p { font-size: 12px; }
+    #chatbot-container { width: 92vw; left: 4vw; }
+}
+
 
     </style>
 </head>
