@@ -123,13 +123,33 @@
         #message-input { flex: 1; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; outline: none; }
         #send-button { background: var(--primary-blue); color: white; border: none; padding: 0 15px; border-radius: 20px; cursor: pointer; }
 
+
+
         /* --- 响应式 --- */
         @media (max-width: 768px) {
-            .image-buttons-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .btn-label { font-size: 12px; }
+            /* 強制移動端也維持每排 4 個按鈕 */
+            .image-buttons-container { 
+                grid-template-columns: repeat(4, 1fr); 
+                gap: 8px; /* 縮小間距以適應小螢幕 */
+                width: 95%; /* 稍微加寬容器利用空間 */
+            }
+            
+            /* 縮小標籤字體以免折行或重疊 */
+            .btn-label { 
+                font-size: 10px; 
+                white-space: nowrap; /* 避免文字斷行 */
+                transform: scale(0.9); /* 稍微縮小視覺尺寸 */
+            }
+
             header h1 { font-size: 1.4rem; }
             #chatbot-container { width: 92vw; left: 4vw; }
+            
+            /* 調整圖片按鈕的圓角，在小螢幕上看起來更精緻 */
+            .image-button {
+                border-radius: 10px;
+            }
         }
+
     </style>
 </head>
 <body>
