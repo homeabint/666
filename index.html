@@ -91,8 +91,24 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             transition: 0.3s; background: #fff;
         }
+        
+        /* --- [新增] 立即选购文字样式 --- */
+        .buy-now-text {
+            font-size: 15px; /* 稍大一点 */
+            font-weight: bold;
+            color: #ff4d4f; /* 醒目红色 */
+            margin-top: 10px;
+            display: block;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            background: rgba(255,255,255,0.9);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
 
         .image-item:hover .image-button { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .image-item:hover .buy-now-text { transform: scale(1.05); color: #ff1f1f; }
+        
         .image-button img { width: 100%; height: 100%; object-fit: cover; }
 
         /* --- Gallery --- */
@@ -122,7 +138,7 @@
         #message-input { flex: 1; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; outline: none; }
         #send-button { background: var(--primary-blue); color: white; border: none; padding: 0 15px; border-radius: 20px; cursor: pointer; }
 
-        /* --- [新增] 侧边栏 & 二维码模态框样式 --- */
+        /* --- 侧边栏 & 二维码模态框样式 --- */
         .side-contact-btn {
             position: fixed;
             right: 0;
@@ -144,31 +160,29 @@
         }
 
         .side-contact-btn:hover {
-            padding-right: 12px; /* 悬停时稍微伸出 */
+            padding-right: 12px;
             background-color: #0050b3;
         }
 
         .side-contact-btn span {
-            writing-mode: vertical-lr; /* 文字竖排 */
+            writing-mode: vertical-lr;
             font-size: 13px;
             font-weight: bold;
             letter-spacing: 2px;
         }
 
-        /* 模态框背景遮罩 */
         .qr-modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
             backdrop-filter: blur(4px);
-            display: none; /* 默认隐藏 */
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 3000;
             animation: fadeIn 0.3s;
         }
 
-        /* 模态框内容 */
         .qr-modal-content {
             background: white;
             width: 300px;
@@ -183,7 +197,6 @@
         .qr-modal-content h3 { margin-top: 0; color: #333; }
         .qr-modal-content p { color: #666; font-size: 14px; margin-bottom: 0; }
         
-        /* 二维码图片 */
         .qr-image {
             width: 200px;
             height: 200px;
@@ -194,7 +207,6 @@
             padding: 5px;
         }
 
-        /* 关闭按钮 */
         .close-qr {
             position: absolute;
             top: 10px; right: 15px;
@@ -222,6 +234,13 @@
         white-space: nowrap;
         transform: scale(0.9);
         margin-bottom: 4px;
+    }
+
+    /* 移动端缩小立即选购文字 */
+    .buy-now-text {
+        font-size: 11px !important;
+        margin-top: 5px;
+        padding: 1px 4px;
     }
 
     .image-button {
@@ -291,34 +310,42 @@
         <a href="https://ym.kashijiehaoka.cn/?s=fphsl5k6411798" target="_blank" class="image-item">
             <span class="btn-label lang-text" data-zh="1号大流量店铺" data-en="No. 1 high-traffic store">1号大流量店铺</span>
             <div class="image-button"><img src="img/b1.png" alt="1"></div>
+            <span class="buy-now-text">立即选购 &gt;</span>
         </a>
         <a href="https://h5.yapingkeji.com/#/pages/sales_index/my_store?mall_id=VO61XQyp%252FUao%252FQPEWWaQ3A%253D%253D&mode=bottom" target="_blank" class="image-item">
             <span class="btn-label lang-text" data-zh="2号大流量店铺" data-en="No. 2 high-traffic store">2号大流量店铺</span>
             <div class="image-button"><img src="img/b2.png" alt="2"></div>
+            <span class="buy-now-text">立即选购 &gt;</span>
         </a>
         <a href="https://172.lot-ml.com/ProductEn/Index/9a8cb17f0a11c172" target="_blank" class="image-item">
             <span class="btn-label lang-text" data-zh="3号大流量店铺" data-en="No. 3 high-traffic store">3号大流量店铺</span>
             <div class="image-button"><img src="img/b3.png" alt="3"></div>
+            <span class="buy-now-text">立即选购 &gt;</span>
         </a>
         <a href="https://haoka.kakatx.com/web/#/pages/index/index/?agent_id=215303" target="_blank" class="image-item">
             <span class="btn-label lang-text" data-zh="4号大流量店铺" data-en="No. 4 high-traffic store">4号大流量店铺</span>
             <div class="image-button"><img src="img/b4.png" alt="4"></div>
+            <span class="buy-now-text">立即选购 &gt;</span>
         </a>
         <a href="https://www.kayi123.com/s/qedZZ6U3" target="_blank" class="image-item">
             <span class="btn-label lang-text" data-zh="5号大流量店铺" data-en="No. 5 high-traffic store">5号大流量店铺</span>
             <div class="image-button"><img src="img/b5.png" alt="5"></div>
+            <span class="buy-now-text">立即选购 &gt;</span>
         </a>
         <a href="https://ka.kaduoduohk.com/index?k=MExDNGVVRVpKeXM9" target="_blank" class="image-item">
             <span class="btn-label lang-text" data-zh="6号大流量店铺" data-en="No. 6 high-traffic store">6号大流量店铺</span>
             <div class="image-button"><img src="img/b6.png" alt="6"></div>
+            <span class="buy-now-text">立即选购 &gt;</span>
         </a>
         <a href="https://h5.gantanhao.com/njJC" target="_blank" class="image-item">
             <span class="btn-label lang-text" data-zh="7号大流量店铺" data-en="No. 7 high-traffic store">7号大流量店铺</span>
             <div class="image-button"><img src="img/b7.png" alt="7"></div>
+            <span class="buy-now-text">立即选购 &gt;</span>
         </a>
         <a href="https://23tui.cn/s/GkajcPxc" target="_blank" class="image-item">
             <span class="btn-label lang-text" data-zh="8号大流量店铺" data-en="No. 8 high-traffic store">8号大流量店铺</span>
             <div class="image-button"><img src="img/b8.png" alt="8"></div>
+            <span class="buy-now-text">立即选购 &gt;</span>
         </a>
     </div>
 </header>
