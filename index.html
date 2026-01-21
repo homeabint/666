@@ -124,12 +124,12 @@
         #send-button { background: var(--primary-blue); color: white; border: none; padding: 0 15px; border-radius: 20px; cursor: pointer; }
 
         /* =========================================
-           [新增] 悬浮音乐播放器样式
+           [唯一修改] 修正悬浮音乐播放器位置 (top: 10px)
            ========================================= */
         .mini-player { 
             position: fixed;
-        top: -10px; /* 改为顶部 */
-        left: 10px; /* 改为左侧 */
+            top: 1px; /* 修正：这里必须是正数，否则看不见 */
+            left: 10px; 
             display: flex;
             align-items: center;
             gap: 10px;
@@ -143,7 +143,7 @@
             transition: transform 0.3s ease;
         }
         .mini-player:hover {
-            transform: translateY(-5px); /* 悬停上浮 */
+            transform: translateY(5px); /* 悬停浮动 */
             border-color: #1db954;
         }
         .mini-player button { 
@@ -230,6 +230,7 @@
     <button onclick="nextSong()">⏭</button>
 </div>
 <audio id="bg-audio"></audio>
+
 <header>
     <div class="lang-switcher">
         <button onclick="switchlang('zh')" id="btn-zh" class="active">中文</button>
@@ -372,14 +373,13 @@ class Chatbot {
 window.onload = () => { new Chatbot(); };
 
 /* =========================================
-   [新增] 音乐播放器逻辑 (GitHub)
+   [修复版] 音乐播放器逻辑
    ========================================= */
-// 请在此处修改您的 GitHub 配置
 const MUSIC_CONFIG = {
-    owner: 'homeabint',   // 例: 'octocat'
-    repo: '666',         // 例: 'my-music-repo'
-    path: 'music',            // 例: 'songs' (如果不改，默认为 music 文件夹)
-    branch: 'main'            // 分支
+    owner: 'homeabint',   
+    repo: '666',         
+    path: 'music',            
+    branch: 'main'            
 };
 
 const audio = document.getElementById('bg-audio');
@@ -387,13 +387,22 @@ const playBtn = document.getElementById('play-btn');
 let songs = [];
 let songIdx = 0;
 
-// 初始化加载音乐
- fetch(`https://api.github.com/repos/${MUSIC_CONFIG.owner}/${MUSIC_CONFIG.repo}/contents/${MUSIC_CONFIG.path}?ref=${MUSIC_CONFIG.branch}`)
+// 初始化逻辑：移除原有的条件限制，直接加载
+function initMusic() {
+    console.log("正在尝试从 GitHub 加载音乐...");
+    fetch(`https://api.github.com/repos/${MUSIC_CONFIG.owner}/${MUSIC_CONFIG.repo}/contents/${MUSIC_CONFIG.path}?ref=${MUSIC_CONFIG.branch}`)
     .then(res => res.json())
     .then(data => {
         if(Array.isArray(data)){
             songs = data.filter(f => /\.(mp3|wav|ogg|m4a)$/i.test(f.name));
-            if (songs.length > 0) loadSong(0);
+            if (songs.length > 0) {
+                console.log(`加载成功，共 ${songs.length} 首歌曲`);
+                loadSong(0);
+            } else {
+                console.log("文件夹是空的或没有音频文件");
+            }
+        } else {
+            console.log("加载失败：", data);
         }
     })
     .catch(err => console.log('Music load failed:', err));
@@ -408,7 +417,10 @@ function loadSong(i) {
 function togglePlay() {
     if (!audio.src) return;
     if (audio.paused) {
-        audio.play().catch(e => console.log('Autoplay blocked'));
+        audio.play().catch(e => {
+            console.log('Autoplay blocked', e);
+            alert("请点击页面任意位置或按钮以允许播放音乐");
+        });
         playBtn.innerText = "💿";
         playBtn.classList.add('playing');
     } else {
@@ -437,6 +449,9 @@ function prevSong() {
 }
 
 audio.onended = nextSong;
+
+// 启动音乐加载
+initMusic();
 </script>
 
 </body>
