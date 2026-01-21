@@ -123,7 +123,49 @@
         #message-input { flex: 1; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; outline: none; }
         #send-button { background: var(--primary-blue); color: white; border: none; padding: 0 15px; border-radius: 20px; cursor: pointer; }
 
+        /* =========================================
+           [新增] 悬浮音乐播放器样式
+           ========================================= */
+        .mini-player { 
+            position: fixed;
+            bottom: 90px; /* 放在 RSS 按钮上方，避免遮挡 */
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(18, 18, 18, 0.85); /* 深色半透明背景 */
+            backdrop-filter: blur(12px);    
+            padding: 8px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            z-index: 9999;
+            transition: transform 0.3s ease;
+        }
+        .mini-player:hover {
+            transform: translateY(-5px); /* 悬停上浮 */
+            border-color: #1db954;
+        }
+        .mini-player button { 
+            background: none; border: none; color: #b3b3b3; 
+            cursor: pointer; font-size: 16px; transition: 0.2s;
+            outline: none; display: flex; align-items: center; padding: 0;
+        }
+        .mini-player button:hover { color: #1db954; }
 
+        /* 旋转唱片效果 */
+        #play-btn { 
+            font-size: 28px; color: #fff; width: 36px; height: 36px;
+            justify-content: center; border-radius: 50%;
+        }
+        @keyframes rotate-anim {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .playing {
+            animation: rotate-anim 3s linear infinite;
+            color: #1db954 !important;
+        }
 
 /* --- 响应式 --- */
 @media (max-width: 768px) {
@@ -152,8 +194,6 @@
     header p { font-size: 12px; }
     #chatbot-container { width: 92vw; left: 4vw; }
 }
-
-
     </style>
 </head>
 <body>
@@ -184,6 +224,12 @@
     </div>
 </div>
 
+<div class="mini-player">
+    <button onclick="prevSong()">⏮</button>
+    <button id="play-btn" onclick="togglePlay()">▶</button>
+    <button onclick="nextSong()">⏭</button>
+</div>
+<audio id="bg-audio"></audio>
 <header>
     <div class="lang-switcher">
         <button onclick="switchlang('zh')" id="btn-zh" class="active">中文</button>
@@ -324,6 +370,74 @@ class Chatbot {
     }
 }
 window.onload = () => { new Chatbot(); };
+
+/* =========================================
+   [新增] 音乐播放器逻辑 (GitHub)
+   ========================================= */
+// 请在此处修改您的 GitHub 配置
+const MUSIC_CONFIG = {
+    owner: 'homeabint',   // 例: 'octocat'
+    repo: '666',         // 例: 'my-music-repo'
+    path: 'music',            // 例: 'songs' (如果不改，默认为 music 文件夹)
+    branch: 'main'            // 分支
+};
+
+const audio = document.getElementById('bg-audio');
+const playBtn = document.getElementById('play-btn');
+let songs = [];
+let songIdx = 0;
+
+// 初始化加载音乐
+if (MUSIC_CONFIG.owner !== '您的GitHub用户名') {
+    fetch(`https://api.github.com/repos/${MUSIC_CONFIG.owner}/${MUSIC_CONFIG.repo}/contents/${MUSIC_CONFIG.path}?ref=${MUSIC_CONFIG.branch}`)
+    .then(res => res.json())
+    .then(data => {
+        if(Array.isArray(data)){
+            songs = data.filter(f => /\.(mp3|wav|ogg|m4a)$/i.test(f.name));
+            if (songs.length > 0) loadSong(0);
+        }
+    })
+    .catch(err => console.log('Music load failed:', err));
+}
+
+function loadSong(i) {
+    songIdx = i;
+    const song = songs[songIdx];
+    audio.src = `https://raw.githubusercontent.com/${MUSIC_CONFIG.owner}/${MUSIC_CONFIG.repo}/${MUSIC_CONFIG.branch}/${MUSIC_CONFIG.path}/${encodeURIComponent(song.name)}`;
+}
+
+function togglePlay() {
+    if (!audio.src) return;
+    if (audio.paused) {
+        audio.play().catch(e => console.log('Autoplay blocked'));
+        playBtn.innerText = "💿";
+        playBtn.classList.add('playing');
+    } else {
+        audio.pause();
+        playBtn.innerText = "▶";
+        playBtn.classList.remove('playing');
+    }
+}
+
+function nextSong() {
+    if (songs.length === 0) return;
+    songIdx = (songIdx + 1) % songs.length;
+    loadSong(songIdx);
+    audio.play();
+    playBtn.innerText = "💿";
+    playBtn.classList.add('playing');
+}
+
+function prevSong() {
+    if (songs.length === 0) return;
+    songIdx = (songIdx - 1 + songs.length) % songs.length;
+    loadSong(songIdx);
+    audio.play();
+    playBtn.innerText = "💿";
+    playBtn.classList.add('playing');
+}
+
+audio.onended = nextSong;
 </script>
 
 </body>
