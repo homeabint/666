@@ -111,20 +111,102 @@
         .footer-banner img { width: 100%; height: auto; display: block; transition: 0.5s; }
 
         /* --- 漂浮按钮 & 聊天 --- */
-        /* 已移除 .rss-float 样式 */
-        
         #chatbot-launcher { position: fixed; left: 20px; bottom: 20px; width: 52px; height: 52px; background: var(--primary-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; }
         #chatbot-container { position: fixed; left: 20px; bottom: 85px; width: 340px; height: 500px; background: white; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.18); display: none; flex-direction: column; z-index: 1001; overflow: hidden; }
         #chat-header { background: var(--primary-blue); color: white; padding: 16px; display: flex; justify-content: space-between; }
         #chat-messages { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9fa; display: flex; flex-direction: column; gap: 10px; }
-        .message-bubble { max-width: 80%; padding: 10px 14px; border-radius: 15px; font-size: 14px; }
+        .message-bubble { max-width: 80%; padding: 10px 14px; border-radius: 15px; font-size: 14px; word-wrap: break-word; }
         .user-message { align-self: flex-end; background: var(--primary-blue); color: white; border-bottom-right-radius: 2px; }
         .bot-message { align-self: flex-start; background: #eee; color: #333; border-bottom-left-radius: 2px; }
         .chat-input-area { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px; }
         #message-input { flex: 1; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; outline: none; }
         #send-button { background: var(--primary-blue); color: white; border: none; padding: 0 15px; border-radius: 20px; cursor: pointer; }
 
-        /* 已移除播放器相关样式 (.mini-player, 旋转动画等) */
+        /* --- [新增] 侧边栏 & 二维码模态框样式 --- */
+        .side-contact-btn {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 12px 6px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            cursor: pointer;
+            box-shadow: -2px 2px 8px rgba(0,0,0,0.2);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .side-contact-btn:hover {
+            padding-right: 12px; /* 悬停时稍微伸出 */
+            background-color: #0050b3;
+        }
+
+        .side-contact-btn span {
+            writing-mode: vertical-lr; /* 文字竖排 */
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* 模态框背景遮罩 */
+        .qr-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            display: none; /* 默认隐藏 */
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            animation: fadeIn 0.3s;
+        }
+
+        /* 模态框内容 */
+        .qr-modal-content {
+            background: white;
+            width: 300px;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .qr-modal-content h3 { margin-top: 0; color: #333; }
+        .qr-modal-content p { color: #666; font-size: 14px; margin-bottom: 0; }
+        
+        /* 二维码图片 */
+        .qr-image {
+            width: 200px;
+            height: 200px;
+            margin: 15px auto;
+            display: block;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        /* 关闭按钮 */
+        .close-qr {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 28px;
+            color: #aaa;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .close-qr:hover { color: #ff4d4f; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleUp { from { transform: scale(0.8); } to { transform: scale(1); } }
 
 /* --- 响应式 --- */
 @media (max-width: 768px) {
@@ -163,6 +245,22 @@
 
 <div id="date-display" class="top-right-date">加载中...</div>
 
+<div class="side-contact-btn" onclick="toggleQrModal()">
+    <i class="fas fa-qrcode fa-lg"></i>
+    <span>联系客服</span>
+</div>
+
+<div id="qrModal" class="qr-modal-overlay" onclick="toggleQrModal()">
+    <div class="qr-modal-content" onclick="event.stopPropagation()">
+        <span class="close-qr" onclick="toggleQrModal()">&times;</span>
+        <h3>扫码添加客服</h3>
+        <img src="img/wechat.jpg" 
+             alt="联系二维码" 
+             class="qr-image"
+             onerror="this.src='https://via.placeholder.com/200?text=QR+Code'">
+        <p>微信扫一扫，一对一咨询</p>
+    </div>
+</div>
 <div id="chatbot-launcher" onclick="togglechat()"><i class="fas fa-robot fa-lg"></i></div>
 
 <div id="chatbot-container">
@@ -283,11 +381,87 @@ function switchlang(lang) {
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 }
 
+/* --- [新增] 二维码模态框开关 --- */
+function toggleQrModal() {
+    const modal = document.getElementById('qrModal');
+    // 如果当前是隐藏(display:none 或空)，则显示flex；否则隐藏
+    if (getComputedStyle(modal).display === 'none') {
+        modal.style.display = 'flex';
+    } else {
+        modal.style.display = 'none';
+    }
+}
+
 /* --- 聊天机器人 --- */
 function togglechat() {
     const chat = document.getElementById('chatbot-container');
     chat.style.display = (chat.style.display === 'none' || chat.style.display === '') ? 'flex' : 'none';
 }
+
+/* --- 50条模拟对话数据库 (FAQ Database) --- */
+const faqDatabase = [
+    // 基础咨询
+    { keywords: ["你好", "在吗", "有人吗", "hello", "hi"], answer: "您好！我是2026金牌选号助理，很高兴为您服务。请问有什么可以帮您？" },
+    { keywords: ["正规", "官方", "靠谱"], answer: "亲，请放心！本站所有号卡均为三大运营商（移动、联通、电信）官方正规卡，支持官方营业厅或APP查询，售后有保障。" },
+    { keywords: ["多少钱", "价格", "费用", "资费"], answer: "我们的套餐非常优惠，大部分仅需19元-29元/月，即可享受100G+的高速流量。具体请点击上方的店铺链接查看详情哦。" },
+    { keywords: ["发货", "快递", "几天到"], answer: "申请成功后，运营商通常在24-48小时内审核发货，一般使用京东或顺丰快递，预计1-3天送达您手中。" },
+    { keywords: ["免运费", "包邮"], answer: "是的，亲！所有号卡均为全国免费包邮送到家。" },
+    
+    // 流量相关
+    { keywords: ["流量", "多少G", "够用吗"], answer: "这里的套餐基本都是百G以上的大流量卡（例如135G、180G甚至295G），刷视频、玩游戏完全够用！" },
+    { keywords: ["限速", "速度"], answer: "这是正规5G卡，只要您当地有5G信号覆盖，就可以享受5G极速网络，不限速（达到几百GB可能会有常规阈值，具体看套餐详情）。" },
+    { keywords: ["通用流量", "定向流量"], answer: "大部分套餐包含大量的通用流量（随便用）和部分定向流量（针对抖音、快手等热门APP）。建议优先选择通用流量多的套餐。" },
+    { keywords: ["热点", "开热点"], answer: "绝大多数套餐支持开启个人热点，具体额度以套餐详情页说明为准。" },
+    
+    // 办理条件
+    { keywords: ["年龄", "几岁", "未成年"], answer: "办理号卡通常需要年满16周岁（部分卡需18周岁），最大一般不超过60周岁。具体限制请在申请页面查看。" },
+    { keywords: ["身份证", "实名"], answer: "根据国家规定，办理手机卡必须实名认证。收到卡后需按照说明书进行激活和实名认证。" },
+    { keywords: ["归属地", "本地"], answer: "大部分互联网优惠卡归属地是随机的（一般为省内或临近省份），但全国流量通用，不影响您正常上网和通话。" },
+    { keywords: ["注销", "不想用了"], answer: "如果您不想用了，可以随时通过运营商官方APP（如中国移动APP）线上办理注销，无需去线下营业厅，非常方便。" },
+    
+    // 选卡建议
+    { keywords: ["移动", "中国移动"], answer: "移动信号覆盖最广，偏远地区也能用。推荐您查看上方的【2号店铺】或【6号店铺】寻找移动好卡。" },
+    { keywords: ["联通", "中国联通"], answer: "联通网速快，性价比高。您可以看看【1号店铺】或【3号店铺】里的联通流量王套餐。" },
+    { keywords: ["电信", "中国电信"], answer: "电信流量给得最足，很多19元甚至9元的超大流量卡。强烈推荐【7号店铺】的电信卡！" },
+    { keywords: ["广电", "中国广电"], answer: "广电是第四大运营商，与移动共用基站，信号有保障，且号段较新。可以在【5号店铺】看看。" },
+    { keywords: ["推荐", "哪款好"], answer: "目前销量最高的是【19元185G】的电信卡和【29元135G】的移动卡。您可以根据您当地哪个运营商信号好来选择。" },
+    
+    // 售后与激活
+    { keywords: ["怎么激活", "激活"], answer: "卡片包裹里都会附带一张激活说明书，通常是扫描二维码或关注公众号进行激活，操作很简单，几分钟就能搞定。" },
+    { keywords: ["充值", "话费"], answer: "激活时通常需要首充50-100元话费才能享受优惠套餐（话费会到账），请务必在专属链接充值，不要直接去支付宝充值哦。" },
+    { keywords: ["合约", "违约金"], answer: "部分超低价套餐可能有6-12个月的合约期（承诺在网），期间注销可能需要违约金。申请详情页会有明确标注，请注意查看。" },
+    { keywords: ["副卡", "办副卡"], answer: "这种特惠互联网大流量卡一般不支持办理副卡，仅限主卡使用。" },
+    { keywords: ["携号转网", "老号"], answer: "非常抱歉，这些优惠套餐仅限新办号码申请，老号码无法直接转成这种套餐。" },
+    
+    // 疑难杂症
+    { keywords: ["审核失败", "被拒"], answer: "如果审核失败，可能是因为：1. 30天内申请过同运营商卡；2. 地址填写不详细（需精确到门牌号）；3. 曾有欠费记录。" },
+    { keywords: ["没信号", "连不上网"], answer: "新卡激活后，建议重启手机或开关飞行模式一次。如果还是没信号，请检查是否打开了数据漫游。" },
+    { keywords: ["诈骗", "骗子"], answer: "我们是正规渠道推广，所有套餐均可拨打10086/10000/10010查询。不涉及任何诈骗行为，请放心。" },
+    { keywords: ["选号", "能选号吗"], answer: "大部分套餐号码是系统随机分配的，少部分联通/电信卡在激活时支持选号。具体看下单页面提示。" },
+    { keywords: ["物联卡", "流量卡"], answer: "我们只做正规手机语音卡（能打电话、能发短信、能上网），不做那种容易锁卡的纯流量物联卡。" },
+    
+    // 其他长尾问题
+    { keywords: ["怎么买", "下单"], answer: "直接点击页面上方的【1号】到【8号】任意店铺按钮，选择您喜欢的套餐，填写收货信息即可免费申请。" },
+    { keywords: ["客服", "人工"], answer: "我就是您的智能助理哦！如果问题太复杂，建议您直接点击店铺链接，联系店铺内的运营商官方人工客服。" },
+    { keywords: ["查单", "进度"], answer: "您可以在刚才申请的店铺链接里找到【订单查询】，输入手机号和身份证号即可查看物流进度。" },
+    { keywords: ["长期", "永久"], answer: "部分套餐是2年优惠期，部分是20年长期套餐。长期套餐非常抢手，建议看到写着“长期”的直接入手！" },
+    { keywords: ["异地", "外地"], answer: "支持异地激活和使用！您可以寄到学校或公司，全国各地都能用（港澳台除外）。" },
+    { keywords: ["学生", "校园卡"], answer: "只要年满16周岁，学生党也可以办理！这些卡比学校营业厅推销的校园卡流量更多、更便宜。" },
+    { keywords: ["保号", "8元套餐"], answer: "我们主要做大流量卡。如果您想保号，建议打运营商电话改8元套餐，然后再办一张我们的卡专门上网，这样最省钱！" },
+    { keywords: ["双卡", "双卡双待"], answer: "是的，现在的手机都支持双卡。您可以把老卡放卡槽1（保号接电话），新办的大流量卡放卡槽2（专门上网）。" },
+    { keywords: ["iphone", "苹果"], answer: "所有智能手机（苹果iPhone、安卓）均可正常使用我们的SIM卡。" },
+    { keywords: ["丢了", "补卡"], answer: "如果卡丢了，您可以去附近的线下官方营业厅异地补卡，和普通手机卡一样。" },
+    { keywords: ["返费", "返利"], answer: "部分套餐通过“首充返费”的形式实现低价（例如充50送120），赠送的话费会分月到账抵扣月租。" },
+    { keywords: ["截止", "下架"], answer: "好套餐随时可能下架！运营商政策变化快，如果您看中了某个套餐，建议尽快申请锁单。" },
+    { keywords: ["收不到", "没收到卡"], answer: "如果超过5天没收到，可能是审核未通过或快递异常。建议去原申请入口查询订单状态。" },
+    { keywords: ["可以改套餐吗"], answer: "激活后，如果想改其他套餐，需要咨询运营商官方政策。通常向下改低资费套餐容易，改这种特惠套餐很难。" },
+    { keywords: ["不用了会怎么样"], answer: "如果激活后不用，会产生欠费，长期欠费会影响征信。建议不用的卡一定要及时注销。" },
+    { keywords: ["多少流量"], answer: "点击上方图片进入店铺，可以看到每张卡的详细流量构成（通用+定向）。" },
+    { keywords: ["真的很便宜"], answer: "是的！这是运营商为了抢占市场推出的互联网专属卡，线下营业厅是办不到的。" },
+    { keywords: ["卡槽"], answer: "标准Nano SIM卡，适用于目前市面上绝大多数手机卡槽。" },
+    { keywords: ["如果", "假设"], answer: "亲，您的问题有点深奥~ 建议您直接办理一张试试，反正大部分卡是免费申请包邮到家的！" },
+    { keywords: ["谢谢", "感谢"], answer: "不客气！希望能帮您选到心仪的大流量卡。祝您生活愉快！" }
+];
 
 class Chatbot {
     constructor() {
@@ -295,15 +469,36 @@ class Chatbot {
         this.input = document.getElementById('message-input');
         document.getElementById('send-button').onclick = () => this.handlesend();
         this.input.onkeypress = (e) => { if(e.key === 'Enter') this.handlesend(); };
-        this.addmessage('尊贵的客人，想了解哪款 5G 大流量卡？', 'bot');
+        this.addmessage('尊贵的客人，想了解哪款 5G 大流量卡？<br>您可以问我：<br>👉 “移动哪款好？”<br>👉 “19元有多少流量？”<br>👉 “怎么激活？”', 'bot');
     }
     handlesend() {
         const val = this.input.value.trim();
         if(!val) return;
         this.addmessage(val, 'user');
         this.input.value = '';
-        setTimeout(() => this.addmessage('收到！正在为您查询最新优惠...', 'bot'), 600);
+        
+        // 模拟思考延迟
+        setTimeout(() => {
+            const reply = this.getBotReply(val);
+            this.addmessage(reply, 'bot');
+        }, 600);
     }
+    
+    // --- 核心：关键词匹配逻辑 ---
+    getBotReply(userText) {
+        // 1. 遍历数据库查找匹配
+        for (const item of faqDatabase) {
+            // 只要匹配到数组中的任意一个关键词
+            for (const keyword of item.keywords) {
+                if (userText.toLowerCase().includes(keyword.toLowerCase())) {
+                    return item.answer;
+                }
+            }
+        }
+        // 2. 默认回复
+        return "这个问题稍微有点难住我了😅。<br>建议您直接点击上方任意【大流量店铺】链接，查看详细的套餐介绍，或者咨询店铺内的官方人工客服哦！";
+    }
+
     addmessage(text, sender) {
         const div = document.createElement('div');
         div.className = `message-bubble ${sender === 'user' ? 'user-message' : 'bot-message'}`;
@@ -313,8 +508,6 @@ class Chatbot {
     }
 }
 window.onload = () => { new Chatbot(); };
-
-/* 已移除音乐播放器 JS 逻辑 */
 </script>
 </body>
 </html>
