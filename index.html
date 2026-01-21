@@ -388,8 +388,7 @@ let songs = [];
 let songIdx = 0;
 
 // 初始化加载音乐
-if (MUSIC_CONFIG.owner !== 'homeabint') {
-    fetch(`https://api.github.com/repos/${MUSIC_CONFIG.owner}/${MUSIC_CONFIG.repo}/contents/${MUSIC_CONFIG.path}?ref=${MUSIC_CONFIG.branch}`)
+ fetch(`https://api.github.com/repos/${MUSIC_CONFIG.owner}/${MUSIC_CONFIG.repo}/contents/${MUSIC_CONFIG.path}?ref=${MUSIC_CONFIG.branch}`)
     .then(res => res.json())
     .then(data => {
         if(Array.isArray(data)){
