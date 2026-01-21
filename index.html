@@ -323,7 +323,7 @@
 <a                          href="https://www.flowcloud.store/txt/1.txt" target="_blank" class="lang-text" data-zh="        隐私声明       " data-en="Privacy Statement">隐私声明</a>
 
 <script>
-/* --- 日期逻辑 --- */
+/* --- 日期逻辑 (保持不变) --- */
 function showrealtime() {
    const now = new Date();
     const weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
@@ -331,7 +331,7 @@ function showrealtime() {
 }
 setInterval(showrealtime, 3600000); showrealtime();
 
-/* --- 语言切换 --- */
+/* --- 语言切换 (保持不变) --- */
 function switchlang(lang) {
     document.getElementById('html-tag').lang = (lang === 'en' ? 'en-us' : 'zh-cn');
     document.querySelectorAll('.lang-text').forEach(el => {
@@ -341,7 +341,7 @@ function switchlang(lang) {
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 }
 
-/* --- 聊天机器人 --- */
+/* --- 聊天机器人 (保持不变) --- */
 function togglechat() {
     const chat = document.getElementById('chatbot-container');
     chat.style.display = (chat.style.display === 'none' || chat.style.display === '') ? 'flex' : 'none';
@@ -373,13 +373,13 @@ class Chatbot {
 window.onload = () => { new Chatbot(); };
 
 /* =========================================
-   [修复版] 音乐播放器逻辑
+   [修复版] 音乐播放器逻辑 (CDN 加速)
    ========================================= */
 const MUSIC_CONFIG = {
-    owner: 'homeabint',   
-    repo: '666',         
-    path: 'music',            
-    branch: 'main'            
+    owner: 'homeabint',    // 您的 GitHub 用户名
+    repo: '666',          // 您的仓库名
+    path: 'music',        // 文件夹路径
+    branch: 'main'        // 分支 (如果您的分支是 master，请改为 master)
 };
 
 const audio = document.getElementById('bg-audio');
@@ -387,42 +387,70 @@ const playBtn = document.getElementById('play-btn');
 let songs = [];
 let songIdx = 0;
 
-// 初始化逻辑：移除原有的条件限制，直接加载
 function initMusic() {
-    console.log("正在尝试从 GitHub 加载音乐...");
+    console.log("正在尝试加载音乐列表...");
+    
+    // 使用 GitHub API 获取列表
     fetch(`https://api.github.com/repos/${MUSIC_CONFIG.owner}/${MUSIC_CONFIG.repo}/contents/${MUSIC_CONFIG.path}?ref=${MUSIC_CONFIG.branch}`)
-    .then(res => res.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`GitHub 访问失败: ${response.status} (请确保仓库是公开 Public 的)`);
+        }
+        return response.json();
+    })
     .then(data => {
         if(Array.isArray(data)){
+            // 过滤音频文件
             songs = data.filter(f => /\.(mp3|wav|ogg|m4a)$/i.test(f.name));
+            
             if (songs.length > 0) {
-                console.log(`加载成功，共 ${songs.length} 首歌曲`);
+                console.log(`成功加载 ${songs.length} 首歌曲`);
                 loadSong(0);
+                // 尝试虽然能加载，但浏览器通常阻止自动播放，需要用户点击
             } else {
-                console.log("文件夹是空的或没有音频文件");
+                alert(`错误：在 ${MUSIC_CONFIG.path} 文件夹中没有找到 mp3/wav 文件`);
             }
         } else {
-            console.log("加载失败：", data);
+            console.log("返回数据格式错误", data);
         }
     })
-    .catch(err => console.log('Music load failed:', err));
+    .catch(err => {
+        console.error('加载出错:', err);
+        // 如果出错，给用户一个提示，不用 alert 避免打扰，但在控制台显示
+        console.log("提示：请检查 GitHub 仓库是否为 Public，且文件名不包含特殊符号。");
+    });
 }
 
 function loadSong(i) {
     songIdx = i;
     const song = songs[songIdx];
-    audio.src = `https://raw.githubusercontent.com/${MUSIC_CONFIG.owner}/${MUSIC_CONFIG.repo}/${MUSIC_CONFIG.branch}/${MUSIC_CONFIG.path}/${encodeURIComponent(song.name)}`;
+    
+    // [关键修改] 使用 jsDelivr CDN 加速，解决国内 GitHub Raw 无法访问的问题
+    // 格式: https://cdn.jsdelivr.net/gh/用户名/仓库名@分支/路径/文件名
+    const cdnUrl = `https://cdn.jsdelivr.net/gh/${MUSIC_CONFIG.owner}/${MUSIC_CONFIG.repo}@${MUSIC_CONFIG.branch}/${MUSIC_CONFIG.path}/${encodeURIComponent(song.name)}`;
+    
+    audio.src = cdnUrl;
+    console.log("当前准备播放:", song.name);
 }
 
 function togglePlay() {
-    if (!audio.src) return;
+    if (!audio.src) {
+        alert("音乐尚未加载完成，请稍等或检查网络/仓库配置。");
+        return;
+    }
+    
     if (audio.paused) {
-        audio.play().catch(e => {
-            console.log('Autoplay blocked', e);
-            alert("请点击页面任意位置或按钮以允许播放音乐");
-        });
-        playBtn.innerText = "💿";
-        playBtn.classList.add('playing');
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // 播放成功
+                playBtn.innerText = "💿";
+                playBtn.classList.add('playing');
+            }).catch(error => {
+                console.log("播放失败:", error);
+                alert("无法播放。可能原因：\n1. 文件名包含中文或特殊字符(建议改纯英文)\n2. 仓库设为了私有(Private)\n3. 浏览器拦截自动播放");
+            });
+        }
     } else {
         audio.pause();
         playBtn.innerText = "▶";
@@ -434,25 +462,29 @@ function nextSong() {
     if (songs.length === 0) return;
     songIdx = (songIdx + 1) % songs.length;
     loadSong(songIdx);
-    audio.play();
-    playBtn.innerText = "💿";
-    playBtn.classList.add('playing');
+    // 切换歌曲后自动播放
+    audio.play().then(() => {
+        playBtn.innerText = "💿";
+        playBtn.classList.add('playing');
+    }).catch(e => console.log(e));
 }
 
 function prevSong() {
     if (songs.length === 0) return;
     songIdx = (songIdx - 1 + songs.length) % songs.length;
     loadSong(songIdx);
-    audio.play();
-    playBtn.innerText = "💿";
-    playBtn.classList.add('playing');
+    audio.play().then(() => {
+        playBtn.innerText = "💿";
+        playBtn.classList.add('playing');
+    }).catch(e => console.log(e));
 }
 
 audio.onended = nextSong;
 
-// 启动音乐加载
+// 启动
 initMusic();
 </script>
+
 
 </body>
 </html>
